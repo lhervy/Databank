@@ -1,0 +1,4 @@
+snowflake-connector-python[pandas]>=3.12
+snowflake-ingest>=1.0.10
+cryptography>=42
+requests>=2.32

@@ -1,0 +1,14 @@
+# dbt
+dbt/databank/target/
+dbt/databank/dbt_packages/
+dbt/databank/logs/
+dbt/databank/.user.yml
+# Python
+__pycache__/
+*.pyc
+.venv/
+# Secrets - never commit keys
+*.p8
+*.pem
+rsa_key*
+.env

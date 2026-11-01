@@ -1,0 +1,35 @@
+name: "E · Banque de France registry (Snowpipe, daily)"
+
+on:
+  schedule:
+    - cron: "0 6 * * 1-5"        # every working day, 07:00 Paris
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Extract date (YYYY-MM-DD), empty = today"
+        required: false
+      full:
+        description: "Publish a full extract"
+        type: boolean
+        default: false
+
+concurrency: { group: ingest-bdf, cancel-in-progress: false }
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT || 'xedwtqk-wk19730' }}
+      SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER || 'SVC_DATABANK_INGEST' }}
+      SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11", cache: pip, cache-dependency-path: ingestion/requirements.txt }
+      - run: pip install -r ingestion/requirements.txt
+      - name: Publish extract, PUT on stage, trigger Snowpipe
+        run: >
+          python -m ingestion.e_bdf_snowpipe.load_bdf_registry
+          ${{ inputs.date && format('--date {0}', inputs.date) || '' }}
+          ${{ inputs.full && '--full' || '' }}

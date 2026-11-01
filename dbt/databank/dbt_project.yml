@@ -1,0 +1,42 @@
+name: databank
+version: "2.0.0"
+config-version: 2
+profile: databank
+
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+# Layer = schema. Bronze lives in RAW / CORE_BANKING (loaded outside dbt).
+models:
+  databank:
+    +copy_grants: true
+    staging:          # Silver (light): 1 view per source table, typed and renamed
+      +schema: STAGING
+      +materialized: view
+      +tags: ["silver"]
+    intermediate:     # Silver: deduplicated, conformed, history
+      +schema: INTERMEDIATE
+      +materialized: table
+      +tags: ["silver"]
+    marts:            # Gold: one model per business use case
+      +schema: MARTS
+      +materialized: table
+      +tags: ["gold"]
+      serving:
+        +tags: ["gold", "live"]
+
+vars:
+  fraud_score_threshold: 50     # >= threshold -> suspicious (AML review)
+  demo_client_id: "C000042"
+  held_tickers: ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "JPM", "V", "MA", "TSLA"]
+  fx_currencies: ["USD", "GBP", "CHF", "JPY"]
+
+tests:
+  databank:
+    +severity: error
+
+flags:
+  send_anonymous_usage_stats: false

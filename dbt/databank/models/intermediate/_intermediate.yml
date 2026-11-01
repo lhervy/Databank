@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: int_fx_rates_daily
+    description: "Conformed daily EUR rates from two independent sources: the ECB API (D, reference) and the Marketplace (C, fallback). source_diff_pct measures how much they disagree."
+    columns:
+      - name: rate_source
+        tests:
+          - accepted_values:
+              values: ['ECB_API', 'MARKETPLACE']
+
+  - name: int_client_history
+    description: "SCD type 2 client history rebuilt from the CDC change log: one row per version, valid_from / valid_to."
+    columns:
+      - name: client_id
+        tests: [not_null]
+
+  - name: int_client_credit_status
+    description: "Latest Banque de France credit status per client (a later extract can clear an incident)."
+    columns:
+      - name: client_id
+        tests: [unique, not_null]

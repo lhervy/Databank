@@ -1,0 +1,28 @@
+name: "D · ECB FX rates (REST API, daily)"
+
+on:
+  schedule:
+    - cron: "30 15 * * 1-5"      # 16:30 Paris (winter): after the ECB publishes at 16:00 CET
+  workflow_dispatch:
+    inputs:
+      start:
+        description: "Force a start date (YYYY-MM-DD), empty = watermark"
+        required: false
+
+concurrency: { group: ingest-ecb, cancel-in-progress: false }
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT || 'xedwtqk-wk19730' }}
+      SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER || 'SVC_DATABANK_INGEST' }}
+      SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11", cache: pip, cache-dependency-path: ingestion/requirements.txt }
+      - run: pip install -r ingestion/requirements.txt
+      - name: Pull new rates and MERGE into RAW.ECB_FX_RATES
+        run: python -m ingestion.d_ecb_api.ingest_ecb_fx ${{ inputs.start && format('--start {0}', inputs.start) || '' }}

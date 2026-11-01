@@ -1,0 +1,28 @@
+name: "F · Mobile app events (batch COPY, 3x a day)"
+
+on:
+  schedule:
+    - cron: "0 5,11,17 * * *"
+  workflow_dispatch:
+    inputs:
+      hours:
+        description: "Hours of events to export"
+        default: "6"
+
+concurrency: { group: ingest-app, cancel-in-progress: false }
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT || 'xedwtqk-wk19730' }}
+      SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER || 'SVC_DATABANK_INGEST' }}
+      SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11", cache: pip, cache-dependency-path: ingestion/requirements.txt }
+      - run: pip install -r ingestion/requirements.txt
+      - name: Export events, PUT on stage, COPY INTO
+        run: python -m ingestion.f_app_events.load_app_events --hours ${{ inputs.hours || '6' }}

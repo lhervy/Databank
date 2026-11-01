@@ -1,0 +1,16 @@
+# Used by dbt Projects on Snowflake: the run uses the session of the
+# caller (task owner), so account/user are not used but must be present.
+# For local development, copy to ~/.dbt/profiles.yml and fill account/user
+# (authenticator: externalbrowser).
+databank:
+  target: prod
+  outputs:
+    prod:
+      type: snowflake
+      account: "xedwtqk-wk19730"
+      user: "not-used-inside-snowflake"
+      role: ACCOUNTADMIN
+      warehouse: DATABANK_WH
+      database: DATABANK
+      schema: DBT
+      threads: 4

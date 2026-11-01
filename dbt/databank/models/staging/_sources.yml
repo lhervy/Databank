@@ -1,0 +1,90 @@
+version: 2
+
+# Bronze layer: everything dbt reads but does not build.
+# Letters A-F match the architecture diagram (docs/architecture.md).
+
+sources:
+
+  - name: tpe
+    description: "**A - Card terminals (TPE).** Authorization messages pushed by the card acquirer. Ingestion: micro-batch streaming (Python producer, every 10 s)."
+    database: DATABANK
+    schema: RAW
+    loaded_at_field: ingested_at
+    freshness:
+      warn_after: {count: 30, period: minute}
+    tables:
+      - name: tpe_authorizations
+        description: "One row per authorization message, JSON kept as received."
+        columns:
+          - name: record_json
+            description: "Raw JSON message (transaction_id, card_token, merchant_id, amount, country, status, event_ts)."
+          - name: ingested_at
+            description: "When Databank received the message (UTC)."
+
+  - name: core_banking
+    description: "**B - Core banking system (OLTP replica).** Current state tables + the CDC change log built by Snowflake streams."
+    database: DATABANK
+    schema: CORE_BANKING
+    tables:
+      - name: clients
+        description: "Bank clients. Contains personal data (masked for non-compliance roles)."
+      - name: accounts
+        description: "Current and investment accounts. ledger_balance_eur is the booked balance at balance_as_of."
+      - name: merchants
+        description: "Merchant reference data from the acquirer."
+      - name: positions
+        description: "Securities held on investment accounts (real US tickers)."
+
+  - name: cdc
+    description: "**B - CDC change log** of the core banking system, appended by the capture task from Snowflake streams."
+    database: DATABANK
+    schema: RAW
+    loaded_at_field: captured_at
+    freshness:
+      warn_after: {count: 1, period: day}
+    tables:
+      - name: core_banking_changes
+        description: "Append-only change log: INSERT / DELETE rows (an UPDATE is a DELETE + INSERT pair)."
+
+  - name: marketplace
+    description: "**C - Market data (real).** Snowflake Curated Data (Free) via Secure Data Sharing - Nasdaq prices, FX rates. 3-month lag on the free tier."
+    database: SNOWFLAKE_CURATED_DATA_FREE
+    schema: PUBLIC_DATA_FREE
+    tables:
+      - name: stock_price_timeseries
+        description: "Daily stock prices and volumes by ticker (long format: one row per ticker, variable, date)."
+      - name: fx_rates_timeseries
+        description: "Daily FX rates by currency pair."
+
+  - name: ecb_api
+    description: "**D - European Central Bank Data Portal API (real).** Euro reference rates pulled daily by GitHub Actions, incremental with a watermark."
+    database: DATABANK
+    schema: RAW
+    loaded_at_field: loaded_at
+    freshness:
+      warn_after: {count: 4, period: day}     # no publication on weekends / TARGET holidays
+    tables:
+      - name: ecb_fx_rates
+        description: "One row per rate_date and currency (units of currency for 1 EUR)."
+
+  - name: bdf
+    description: "**E - Banque de France registry extracts.** Daily CSV files, loaded by Snowpipe (REST-triggered) from an internal stage."
+    database: DATABANK
+    schema: RAW
+    loaded_at_field: "loaded_at::timestamp_ntz"
+    freshness:
+      warn_after: {count: 2, period: day}
+    tables:
+      - name: bdf_registry
+        description: "Credit-incident registry lines; a later extract can clear an earlier incident."
+
+  - name: app
+    description: "**F - Mobile app events.** Newline-delimited JSON files, batch COPY INTO from a stage (S3 + Snowpipe auto-ingest in production)."
+    database: DATABANK
+    schema: RAW
+    loaded_at_field: "loaded_at::timestamp_ntz"
+    freshness:
+      warn_after: {count: 2, period: day}
+    tables:
+      - name: app_events
+        description: "One row per app event (login, screen_view, budget_set, notification_open...)."

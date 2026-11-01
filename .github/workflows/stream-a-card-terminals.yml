@@ -1,0 +1,37 @@
+name: "A · Card terminals (micro-batch stream, on demand)"
+
+# Start ~10 minutes before a demo. Not scheduled: streaming all day
+# would keep the warehouse running and burn credits.
+on:
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: "How long to stream"
+        default: "20"
+      per_batch:
+        description: "Average messages per 10-second micro-batch"
+        default: "50"
+      backfill_days:
+        description: "Instead of streaming, load N days of history (0 = stream)"
+        default: "0"
+
+concurrency: { group: stream-tpe, cancel-in-progress: true }
+
+jobs:
+  stream:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT || 'xedwtqk-wk19730' }}
+      SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER || 'SVC_DATABANK_INGEST' }}
+      SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11", cache: pip, cache-dependency-path: ingestion/requirements.txt }
+      - run: pip install -r ingestion/requirements.txt
+      - name: Stream authorizations
+        run: >
+          python -m ingestion.a_tpe_stream.producer
+          --minutes ${{ inputs.minutes }} --per-batch ${{ inputs.per_batch }}
+          --backfill-days ${{ inputs.backfill_days }}

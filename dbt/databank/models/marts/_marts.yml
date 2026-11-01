@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  # ------------------------------------------------------------ finance
+  - name: fct_card_transactions
+    description: "Every valid card payment, deduplicated, enriched with account, client and merchant, fraud-scored. **Dynamic table** - at most 1 minute behind RAW."
+    columns:
+      - name: transaction_id
+        description: "One row per transaction (retries removed)."
+        tests: [unique, not_null]
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_accounts')
+              field: account_id
+      - name: amount_eur
+        tests: [not_null]
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['AUTHORIZED', 'DECLINED']
+      - name: booking_status
+        description: "PENDING until the core banking ledger books the payment (single source of truth for the balance)."
+        tests:
+          - accepted_values:
+              values: ['PENDING', 'BOOKED']
+
+  - name: dim_clients
+    description: "One row per client with Banque de France credit status. first_name, last_name, email, iban and birth_date are **masked** for every role except Compliance."
+    columns:
+      - name: client_id
+        tests: [unique, not_null]
+
+  - name: dim_accounts
+    description: "Accounts with their booked balance."
+    columns:
+      - name: account_id
+        tests: [unique, not_null]
+
+  - name: dim_merchants
+    description: "Merchants."
+    columns:
+      - name: merchant_id
+        tests: [unique, not_null]
+
+  - name: client_daily_spend
+    description: "Use case 3 · personalized dashboards: spend per client, day and category."
+
+  # ------------------------------------------------------------ serving (live)
+  - name: account_live_balance
+    description: "Use case 1 · live balance = ledger balance - pending card payments. **Dynamic table**, 1-minute lag."
+    columns:
+      - name: account_id
+        tests: [unique, not_null]
+
+  - name: portfolio_valuation
+    description: "Use case 2 · investments valued at the last real closing price (Marketplace) converted to EUR with the conformed FX rate."
+
+  - name: app_my_transactions
+    description: "Mobile app view. Secure view + row access policy: the logged-in client only sees their own rows."
+  - name: app_my_balance
+    description: "Mobile app view of the live balance (row access policy)."
+  - name: app_my_portfolio
+    description: "Mobile app view of the portfolio (row access policy)."
+  - name: app_my_spend
+    description: "Mobile app view of spending (row access policy)."
+
+  # ------------------------------------------------------------ regulatory
+  - name: reg_bdf_daily_report
+    description: "Use case 4 · daily figures for the Banque de France report."
+    columns:
+      - name: event_date
+        tests: [unique, not_null]
+  - name: aml_alerts
+    description: "Suspicious transactions to review before a Tracfin declaration (names masked except for Compliance)."
+  - name: credit_risk_watchlist
+    description: "Clients with a Banque de France incident and a negative live balance."
+
+  # ------------------------------------------------------------ market & digital
+  - name: fx_rates_daily
+    description: "Conformed daily EUR reference rates with their source (ECB API or Marketplace)."
+  - name: stock_prices_daily
+    description: "Daily closes in USD and EUR for the tickers our clients hold."
+  - name: app_engagement_daily
+    description: "Daily app usage by event type, screen and device (source F)."
+
+  # ------------------------------------------------------------ data quality
+  - name: dq_rejected_authorizations
+    description: "Quarantine: authorization messages rejected, with the reason (UNPARSABLE_JSON, INVALID_AMOUNT, UNKNOWN_CARD...)."
+    columns:
+      - name: reject_reason
+        tests: [not_null]

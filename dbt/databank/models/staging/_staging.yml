@@ -1,0 +1,84 @@
+version: 2
+
+models:
+  - name: stg_tpe__authorizations
+    description: "A · Card authorizations parsed from JSON. Invalid rows are flagged (is_parsable) and quarantined downstream."
+    columns:
+      - name: transaction_id
+        description: "Unique id of the authorization; repeated when the acquirer retries."
+      - name: is_parsable
+        description: "False when the message is not valid JSON or has no transaction_id."
+        tests: [not_null]
+
+  - name: stg_core_banking__clients
+    description: "B · Clients, current state. Personal data masked at source."
+    columns:
+      - name: client_id
+        tests: [unique, not_null]
+      - name: segment
+        tests:
+          - accepted_values:
+              values: ['RETAIL', 'PREMIUM', 'PRIVATE']
+
+  - name: stg_core_banking__accounts
+    description: "B · Accounts and their booked ledger balance."
+    columns:
+      - name: account_id
+        tests: [unique, not_null]
+      - name: client_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_core_banking__clients')
+              field: client_id
+      - name: account_type
+        tests:
+          - accepted_values:
+              values: ['CURRENT', 'INVESTMENT']
+
+  - name: stg_core_banking__merchants
+    description: "B · Merchants."
+    columns:
+      - name: merchant_id
+        tests: [unique, not_null]
+
+  - name: stg_core_banking__positions
+    description: "B · Positions on investment accounts."
+    columns:
+      - name: quantity
+        tests: [not_null]
+
+  - name: stg_cdc__core_banking_changes
+    description: "B · CDC change log rows."
+    columns:
+      - name: change_type
+        tests:
+          - accepted_values:
+              values: ['INSERT', 'DELETE']
+
+  - name: stg_market__stock_prices
+    description: "C · Daily closing prices (USD) from the Marketplace share."
+    columns:
+      - name: close_usd
+        tests: [not_null]
+
+  - name: stg_market__fx_rates
+    description: "C · Daily EUR FX rates from the Marketplace share."
+
+  - name: stg_ecb__fx_rates
+    description: "D · ECB reference rates from the API, latest load per day and currency."
+    columns:
+      - name: rate
+        tests: [not_null]
+
+  - name: stg_bdf__registry
+    description: "E · Banque de France registry lines."
+    columns:
+      - name: client_id
+        tests: [not_null]
+
+  - name: stg_app__events
+    description: "F · Mobile app events, deduplicated on event_id."
+    columns:
+      - name: event_id
+        tests: [unique, not_null]

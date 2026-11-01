@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install ruff -r ingestion/requirements.txt
+      - name: Lint loaders
+        run: ruff check ingestion --select E,F,W,I --ignore E501
+      - name: Import check
+        run: python -c "import ingestion.a_tpe_stream.producer, ingestion.d_ecb_api.ingest_ecb_fx, ingestion.e_bdf_snowpipe.load_bdf_registry, ingestion.f_app_events.load_app_events"
+
+  dbt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install "dbt-snowflake~=1.9.0"
+      - name: dbt parse (validates models, refs, sources, tests - no warehouse needed)
+        working-directory: dbt/databank
+        run: dbt parse --profiles-dir .
