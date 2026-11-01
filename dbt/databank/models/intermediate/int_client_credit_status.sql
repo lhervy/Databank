@@ -7,4 +7,4 @@ select
     extract_date as status_as_of,
     source_file
 from {{ ref('stg_bdf__registry') }}
-qualify row_number() over (partition by client_id, registry order by extract_date desc, loaded_at desc) = 1
+qualify row_number() over (partition by client_id order by extract_date desc, incident_flag desc, loaded_at desc) = 1

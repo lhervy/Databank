@@ -13,7 +13,7 @@ Fictive French bank on **Snowflake (AWS, Paris region)**. This dbt project build
 | E | Banque de France files | Snowpipe from a stage (REST-triggered) |
 | F | Mobile app events | batch COPY INTO from a stage |
 
-Live models (`fct_card_transactions`, `account_live_balance`) are **dynamic tables**
+Live models (fct_card_transactions, account_live_balance) are **dynamic tables**
 refreshed every minute; everything else is rebuilt by the task graph every 15 minutes.
 
 Open the **lineage graph** (bottom right) to see the full DAG from sources to marts.
