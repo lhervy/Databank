@@ -54,7 +54,7 @@ with tab_client:
                               amount_eur AS "Amount (€)", status AS "Status", booking_status AS "Booking",
                               is_suspicious AS "Fraud alert"
                        FROM DATABANK.MARTS.FCT_CARD_TRANSACTIONS WHERE client_id = '{cid}'
-                       ORDER BY event_ts DESC LIMIT 15"""), use_container_width=True)
+                       ORDER BY event_ts DESC LIMIT 15"""), width="stretch")
 
     left, right = st.columns(2)
     with left:
@@ -66,7 +66,7 @@ with tab_client:
         st.subheader("Portfolio")
         st.dataframe(q(f"""SELECT ticker, quantity, close_usd, price_date, market_value_eur, unrealized_pnl_eur
                            FROM DATABANK.MARTS.PORTFOLIO_VALUATION WHERE client_id = '{cid}' ORDER BY market_value_eur DESC"""),
-                     use_container_width=True)
+                     width="stretch")
 
 # ------------------------------------------------------------------ markets
 with tab_market:
@@ -84,15 +84,15 @@ with tab_market:
 # ------------------------------------------------------------------ ops
 with tab_ops:
     st.subheader("Source freshness")
-    st.dataframe(q("SELECT * FROM DATABANK.OPS.SOURCE_FRESHNESS"), use_container_width=True)
+    st.dataframe(q("SELECT * FROM DATABANK.OPS.SOURCE_FRESHNESS"), width="stretch")
     a, b = st.columns(2)
     with a:
         st.subheader("Quarantined messages")
         st.dataframe(q("""SELECT reject_reason, COUNT(*) AS n FROM DATABANK.MARTS.DQ_REJECTED_AUTHORIZATIONS
-                          GROUP BY 1 ORDER BY 2 DESC"""), use_container_width=True)
+                          GROUP BY 1 ORDER BY 2 DESC"""), width="stretch")
     with b:
         st.subheader("Ingestion latency (last hour)")
         st.dataframe(q("""SELECT COUNT(*) AS payments, ROUND(AVG(ingest_latency_ms)) AS avg_ms,
                                  MAX(ingest_latency_ms) AS max_ms
                           FROM DATABANK.MARTS.FCT_CARD_TRANSACTIONS
-                          WHERE ingested_at > DATEADD(hour, -1, SYSDATE())"""), use_container_width=True)
+                          WHERE ingested_at > DATEADD(hour, -1, SYSDATE())"""), width="stretch")
