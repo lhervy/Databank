@@ -42,7 +42,7 @@ everything else runs in cheaper batches (see [design_questions.md](docs/design_q
 | Warehouse choice justified | ✅ Snowflake compared with Redshift, BigQuery and Databricks | [docs/warehouse_choice.md](docs/warehouse_choice.md) |
 | dbt | ✅ 32 models and 43 tests, running inside Snowflake | [dbt/databank/](dbt/databank/) |
 | Orchestration | ✅ task graph (DAG) in Snowflake + scheduled GitHub Actions | [docs/orchestration_containers_iac.md](docs/orchestration_containers_iac.md) |
-| Documentation | ✅ this README, one README per folder, 11 documents in `docs/` | [docs/](docs/) |
+| Documentation | ✅ this README, one README per folder, 12 documents in `docs/` | [docs/](docs/) |
 | GitHub with a clear folder system | ✅ one folder per pipeline stage | [Section 7](#7-how-the-repository-is-organised) |
 | Every person owns something in the pipeline | ✅ one owner per area | [Section 8](#8-team-and-ownership) |
 
@@ -148,6 +148,7 @@ Every area of the pipeline has one owner: the person who answers "who fixes it a
 | [course_concepts.md](docs/course_concepts.md) | every course concept and where to find it in the project |
 | [runbook.md](docs/runbook.md) | how to deploy, run the demo, pause, and what it costs |
 | [setup_github_actions.md](docs/setup_github_actions.md) | how GitHub connects to Snowflake (key pair) |
+| [target_architecture.md](docs/target_architecture.md) | the best-case design with unlimited budget, compared with today |
 | [glossary.md](docs/glossary.md) | every technical word used here, in plain language |
 
 ## 10. Key figures (measured in Snowflake, November 2026)
@@ -159,6 +160,17 @@ Every area of the pipeline has one owner: the person who answers "who fixes it a
 | Investment positions valued with real prices | 10,575 |
 | dbt build (32 models + 43 tests) | 75 passed, 0 errors, about 17 seconds |
 | Total Snowflake spend for the whole project so far | about 11.5 credits (≈ $34) |
+
+## 11. And with an unlimited budget?
+
+We also designed the **best-case version** of this pipeline: Kafka and Flink for millisecond fraud checks,
+an open Iceberg lakehouse, managed connectors, machine learning, Airflow, Terraform and a second region
+for disaster recovery. It keeps the same cloud, warehouse, layers and dbt models, so today's pipeline can
+grow into it step by step.
+
+[![Target architecture](docs/img/target_architecture.png)](docs/target_architecture.md)
+
+Full comparison, costs and migration plan: [docs/target_architecture.md](docs/target_architecture.md).
 
 ---
 
