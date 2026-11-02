@@ -15,6 +15,7 @@ Run in a Snowflake workspace as `ACCOUNTADMIN`, in this order:
 | 7 | deploy `dbt/databank` as `DATABANK.DBT.DATABANK_DBT`, then `06_dbt_deploy_and_dag.sql` | dbt build + task graph |
 | 8 | `snowflake/08_monitoring.sql` | OPS views |
 | 9 | `streamlit/streamlit_app.py` | dashboard (Streamlit in Snowflake, warehouse `DATABANK_WH`) |
+| 10 | `snowflake/09_git_integration.sql` | link Snowflake to this GitHub repo (Git workspace) |
 
 Upgrading from the v1 prototype: run `snowflake/migrations/001_seed_from_v1.sql` between steps 2 and 3.
 
