@@ -42,7 +42,7 @@ everything else runs in cheaper batches (see [design_questions.md](docs/design_q
 | Warehouse choice justified | ✅ Snowflake compared with Redshift, BigQuery and Databricks | [docs/warehouse_choice.md](docs/warehouse_choice.md) |
 | dbt | ✅ 32 models and 43 tests, running inside Snowflake | [dbt/databank/](dbt/databank/) |
 | Orchestration | ✅ task graph (DAG) in Snowflake + scheduled GitHub Actions | [docs/orchestration_containers_iac.md](docs/orchestration_containers_iac.md) |
-| Documentation | ✅ this README, one README per folder, 12 documents in `docs/` | [docs/](docs/) |
+| Documentation | ✅ this README, one README per folder, 13 documents in `docs/` | [docs/](docs/) |
 | GitHub with a clear folder system | ✅ one folder per pipeline stage | [Section 7](#7-how-the-repository-is-organised) |
 | Every person owns something in the pipeline | ✅ one owner per area | [Section 8](#8-team-and-ownership) |
 
@@ -149,6 +149,7 @@ Every area of the pipeline has one owner: the person who answers "who fixes it a
 | [runbook.md](docs/runbook.md) | how to deploy, run the demo, pause, and what it costs |
 | [setup_github_actions.md](docs/setup_github_actions.md) | how GitHub connects to Snowflake (key pair) |
 | [target_architecture.md](docs/target_architecture.md) | the best-case design with unlimited budget, compared with today |
+| [forecast.md](docs/forecast.md) | 2027–2030 forecast based on Gartner research and emerging tools |
 | [glossary.md](docs/glossary.md) | every technical word used here, in plain language |
 
 ## 10. Key figures (measured in Snowflake, November 2026)
@@ -171,6 +172,13 @@ grow into it step by step.
 [![Target architecture](docs/img/target_architecture.png)](docs/target_architecture.md)
 
 Full comparison, costs and migration plan: [docs/target_architecture.md](docs/target_architecture.md).
+
+## 12. Where it is heading (2027–2030)
+
+Based on Gartner's research (AI-ready data, the shift to event streaming, AI agents and their failure
+rates, decision governance, semantic layers, open table formats, sovereignty) and the EU AI Act deadline
+for credit scoring (2 December 2027), we forecast how Databank's platform should evolve, with three
+scenarios and a watchlist of emerging tools: [docs/forecast.md](docs/forecast.md).
 
 ---
 
