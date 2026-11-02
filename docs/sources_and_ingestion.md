@@ -11,6 +11,29 @@ Six sources, six different ingestion methods. Letters and numbers match the arch
 | E | Banque de France | simulated | CSV files `;` | 200 lines full, ~15 delta | PUT + Snowpipe (5) | daily 07:00 Paris | `RAW.BDF_REGISTRY` |
 | F | Mobile app backend | simulated | gzip JSON lines | ~12k events / run | PUT + COPY INTO (6) | 3× a day | `RAW.APP_EVENTS` |
 
+## The ingestion types from the course, and where each one is used
+
+| Type (course) | What it means | Databank source |
+|---|---|---|
+| Batch | load a whole file or table on a schedule | F · app events (3 times a day) |
+| Incremental | load only what is new since the last run (watermark) | D · ECB API |
+| Micro-batch | very small batches, very often | A · card terminals (every 10 s) |
+| CDC | copy only the changes of an operational database | B · core banking |
+| Streaming | continuous flow of single records | A in production (Kafka / Snowpipe Streaming) |
+| File + Snowpipe | serverless load as soon as a file arrives | E · Banque de France |
+| Data sharing | read another account's data without copying it | C · Marketplace |
+
+All six methods are **idempotent**: running them twice does not create duplicates.
+
+| Source | What prevents duplicates |
+|---|---|
+| A | dbt keeps one row per `transaction_id` (network retries are removed) |
+| B | a stream returns each change only once; the capture runs in one transaction |
+| C | nothing is loaded |
+| D | MERGE on `(rate_date, currency)` + watermark |
+| E | Snowpipe remembers every file it loaded |
+| F | `COPY INTO` remembers every file loaded in the last 64 days |
+
 ## How each method works
 
 **A · Micro-batch streaming.** `producer.py` sends a batch of authorization messages every 10 seconds

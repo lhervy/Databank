@@ -30,6 +30,15 @@ warehouse; dbt runs inside Snowflake; GitHub Actions runs the loaders.
 | Operations | ✅ near-zero | ⚠️ workgroups, vacuum/analyze on provisioned | ✅ near-zero | ⚠️ cluster management |
 | Course alignment | ✅ used in TD 2 | — | used in TD 1.2 | — |
 
+Other engines from the course benchmark were set aside quickly: **Microsoft Fabric** (Azure, so a second
+cloud), **ClickHouse** (excellent for sub-second analytics on logs and events, but our live need is one
+screen with a 1-minute tolerance, see [design_questions.md](design_questions.md#1-latency-what-does-the-business-really-need)),
+**MotherDuck / DuckDB** (great for small analytical workloads, but less governance for a regulated bank),
+**SageMaker Studio** (a machine-learning workbench, not a warehouse).
+
+In the course's shared-responsibility model, Snowflake is **SaaS**: Snowflake runs the servers, the
+operating system and the software; we only manage our data, our users and our permissions.
+
 ## Why not the others
 
 - **BigQuery** is excellent and serverless, but it is a GCP service: using it means a second cloud (AWS for
