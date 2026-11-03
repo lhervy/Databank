@@ -42,7 +42,7 @@ else runs in cheaper batches (see [design_questions.md](docs/design_questions.md
 | C2 | Use cases and business value | 3 use cases: decision, user, metric (grain, formula, exclusions), frequency, acceptance tests | [use_cases.md](docs/use_cases.md) |
 | C3 | Working end-to-end pipeline | 6 sources, 32 dbt models; output checked against known data and an independent recomputation; documented launch; containerised job | [evidence.md](docs/evidence.md), [runbook.md](docs/runbook.md), [ingestion/Dockerfile](ingestion/Dockerfile) |
 | C4 | Tools appropriate to the requirements | each tool justified, alternatives and trade-offs, what we chose **not** to use | [warehouse_choice.md](docs/warehouse_choice.md), [orchestration_containers_iac.md](docs/orchestration_containers_iac.md) |
-| C5 | Actual, controlled cloud use | Snowflake on AWS Paris; run history; Terraform resources with protected remote state | [terraform/](terraform/), [evidence.md](docs/evidence.md#6-scheduling-and-run-history) |
+| C5 | Actual, controlled cloud use | Snowflake on AWS Paris; loaders and a containerised job run from GitHub Actions; Terraform **applied**, state protected in an encrypted stage | [terraform/](terraform/), [evidence.md](docs/evidence.md#6-scheduling-and-run-history) |
 | C6 | Reliability, quality and operations | key, business-rule and freshness checks; a demonstrated failure; replay without double counting; task graph; 2 incident scenarios, both tested | [evidence.md](docs/evidence.md), [incidents.md](docs/incidents.md) |
 | C7 | Security and costs | allowed/denied access verified; masked personal data; secrets out of the code; cost in free credits + projection; budget cap and shutdown procedure | [security.md](docs/security.md), [runbook.md](docs/runbook.md#costs) |
 | C8 | Slides and presentation | storyline, architecture, evidence, limitations, speaking order | slide deck + [Section 13](#13-limitations) |
@@ -205,7 +205,7 @@ We state them openly; each one has a planned next step.
 | Limitation | Impact | Next step |
 |---|---|---|
 | 4 of the 6 sources are simulated (client data cannot be real for privacy reasons) | figures are realistic, not real | real data is used where it exists: market data (C) and ECB rates (D) |
-| The GitHub loaders and Terraform `apply` wait for the key setup | ingestion history for A and E comes from our first prototype | add the keys, run the workflows ([setup_github_actions.md](docs/setup_github_actions.md)) |
+| Most of the card-payment history (300,000 messages) was loaded by our first prototype | only the newest payments come from the GitHub stream | run the stream with `--backfill-days` to regenerate history through the new loader |
 | The live path has a 1-minute lag, not 1 second | enough for a "pending" line, not for instant balances | operational database in front of the app ([target_architecture.md](docs/target_architecture.md)) |
 | The fraud score is rule-based (1.3 % of payments flagged) | many false positives for compliance | machine-learning model (target architecture) |
 | The live table refreshes before tests run | a bad record can appear there for a minute (seen in the drill) | filter impossible values in staging |

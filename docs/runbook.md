@@ -6,12 +6,12 @@
 |---|---|
 | Snowflake platform (schemas, roles, policies, stages, pipe) | ✅ deployed |
 | Sources B (CDC) and C (Marketplace) | ✅ running |
-| Sources A and E | ✅ history loaded; new data arrives when the GitHub workflows run |
-| Sources D and F | ⏳ waiting for the GitHub ↔ Snowflake key (see [setup_github_actions.md](setup_github_actions.md)) |
+| Sources A and E | ✅ running from GitHub Actions (card stream on demand, Banque de France file through Snowpipe) |
+| Sources D and F | ✅ running from GitHub Actions (ECB job in its Docker container; app events by `COPY INTO`) |
 | dbt project + task graph | ✅ deployed, last run: 75 passed, 0 errors |
 | Dashboard | ✅ deployed |
-| Containerised job (`ingestion/Dockerfile`) | ✅ image built and checked by CI; first cloud run once the key exists |
-| Terraform (`terraform/`) | ✅ `fmt` + `validate` in CI; `apply` once the Terraform key exists |
+| Containerised job (`ingestion/Dockerfile`) | ✅ runs in GitHub Actions: build the image, `docker run` the ECB loader |
+| Terraform (`terraform/`) | ✅ applied from GitHub Actions; state in the encrypted stage `OPS.TF_STATE` |
 | Proof (drills, access tests) | ✅ logged in `OPS.EVIDENCE_LOG`, see [evidence.md](evidence.md) |
 | Snowflake ↔ GitHub link (Git workspace) | ✅ connected |
 

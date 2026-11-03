@@ -1,8 +1,8 @@
 # Incident scenarios
 
 Two realistic incidents, how the pipeline detects them, who acts, and how it recovers.
-**Incident 1 was tested on 3 November 2026**; incident 2 is happening right now (the ECB feed is not loaded
-yet), so it is tested too. Results: [evidence.md](evidence.md).
+**Both were tested on 3 November 2026.** Incident 2 was observed for real: before the first ECB load the
+feed was empty, exactly like an outage; the first load then caught up two years of rates. Results: [evidence.md](evidence.md).
 
 ---
 
@@ -38,9 +38,13 @@ the row, the pipeline passed again (drill `future_payment`).
 | **Why nothing breaks** | `int_fx_rates_daily` uses the ECB rate first and the Snowflake Marketplace rate as fallback; each row says which source it used (`rate_source`) |
 | **Recovery** | when the API is back, the next run reads the watermark (last date loaded) and fetches every missing day; MERGE on `(rate_date, currency)` means re-running never duplicates a rate |
 
-**Test result (today):** the ECB table is empty, `dbt source freshness` returns **WARN** for
+**Test result (3 Nov, before the first ECB load):** the ECB table was empty, `dbt source freshness` returns **WARN** for
 `ecb_api.ecb_fx_rates`, 100 % of rates come from the Marketplace fallback, and the 10,575 positions are
 still valued (€259,871,013). Logged as drill `ecb_outage`.
+
+**Recovery observed:** the first run of the ECB job (in its Docker container) read an empty watermark and
+loaded every working day of the last two years at once: 2,036 rates for 4 currencies, 4 Nov 2024 to
+2 Nov 2026. No manual step was needed.
 
 ---
 

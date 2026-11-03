@@ -95,12 +95,25 @@ The pipeline keeps serving correct figures, and the freshness check tells the ow
 | dbt full build | 32 models + 43 tests: PASS 75, ERROR 0 (1 Nov 2026) |
 | Dynamic table refreshes | `INFORMATION_SCHEMA.DYNAMIC_TABLE_REFRESH_HISTORY()`: last refresh SUCCEEDED (3 Nov 2026) |
 | Automatic checks on every change (CI run #6, 3 Nov 2026) | ✅ python lint + imports, `dbt parse`, **Docker image built and smoke-tested as non-root**, **`terraform fmt` + `validate`**: [run](https://github.com/lhervy/databank-data-platform/actions/runs/41608561921) |
-| GitHub Actions runs of the loaders, the Docker job in the cloud and Terraform `apply` | *Actions* tab of the repository, once the keys are set up |
+| GitHub Actions runs of the loaders, the Docker job and Terraform | *Actions* tab of the repository (see section 7) |
 
-## 7. Not proven yet
+## 7. Runs in the cloud (3 November 2026)
 
-| Item | Why | Next step |
+Every loader, the containerised job and Terraform ran from GitHub Actions, logging in with key pairs
+(no password). Results checked in Snowflake afterwards.
+
+| Run | What happened | Checked in Snowflake |
 |---|---|---|
-| Loaders A, D, E, F running from GitHub Actions | the GitHub ↔ Snowflake key is not set up yet | add the key ([setup_github_actions.md](setup_github_actions.md)), run the workflows |
-| Containerised job run in the cloud | same reason; the image is built and checked by CI on every change | run *D · ECB FX rates* once the key exists |
-| Terraform `apply` | same reason; `fmt` and `validate` run in CI | run the *Terraform* workflow with `plan`, then `apply` |
+| **D · ECB FX rates**, in its Docker container (run `41612295581`) | image built from `ingestion/Dockerfile`, run as non-root user; empty watermark, so it loaded two years at once | 2,036 real ECB rates, 4 currencies, 4 Nov 2024 → 2 Nov 2026 |
+| **F · App events** (`PUT` + `COPY INTO`) | one batch of mobile-app events loaded | 12,000 events; `APP_ENGAGEMENT_DAILY` has 30 rows, last day 3 Nov |
+| **E · Banque de France registry** (Snowpipe REST) | first run failed on a library version clash (`snowflake-ingest` vs connector 5.x); fixed by pinning the connector to 3.18.1, second run green | file `bdf_registry_2026-11-03.csv`, 18 new lines; 243 lines in staging |
+| **A · Card terminals** (micro-batch stream, 5 minutes) | one producer sent a batch every few seconds | 1,390 messages received → 1,384 valid payments in Gold (the rest: defects injected on purpose); median ingest latency ≈ 4.8 s |
+| **Terraform** `plan` then `apply` (run `41614818486`) | created `DATABANK_BI_WH`, role `DATABANK_REVIEWER`, schema `EVIDENCE` | objects exist; state in `@OPS.TF_STATE/latest/` plus `versions/20261103T095512Z_41614818486/` |
+
+**After the runs:** full dbt build **PASS 75, ERROR 0**. Exchange rates now come from both sources:
+2,036 days from the ECB API, 36,844 from the Marketplace fallback (older dates and other currencies);
+portfolio valuation €276,424,023. Gold card transactions: 301,118. The live tables were suspended again
+afterwards to save credits.
+
+**One manual step:** the resource monitor `DATABANK_RM` was attached to `DATABANK_BI_WH` by an
+`ACCOUNTADMIN`, because Terraform's service user is deliberately not `ACCOUNTADMIN`.

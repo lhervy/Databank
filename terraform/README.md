@@ -4,6 +4,13 @@ Terraform declares Snowflake resources in files that are reviewed and versioned 
 The core platform was built first with the re-runnable SQL scripts in [`snowflake/`](../snowflake/); this
 folder declares the resources added since then, using the Terraform workflow seen in class.
 
+## Status
+
+**Applied on 3 November 2026** from GitHub Actions: `plan` (no error), then `apply`. Checked in Snowflake:
+`DATABANK_BI_WH` exists (XSMALL, 60 s auto-suspend), role `DATABANK_REVIEWER` exists (owned by
+`SECURITYADMIN`), schema `DATABANK.EVIDENCE` exists, and the state is stored as
+`@OPS.TF_STATE/latest/terraform.tfstate` plus a dated copy in `versions/`.
+
 ## What is declared here
 
 | Resource | Why the pipeline needs it |
