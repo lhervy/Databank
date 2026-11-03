@@ -6,19 +6,21 @@ The talk lasts about **10 minutes with three speakers**; the live demo is spread
 
 ## Running order
 
-| Time | Speaker | Slides | Live part |
+The slides are in Canva (12 slides); each slide's speaker notes repeat the speaker, the timing and what to say.
+
+| Time | Speaker | Slide | Live part |
 |---|---|---|---|
-| 0:00–0:30 | Thomas | title, team and who owns what | |
-| 0:30–1:30 | Thomas | Databank (the company), the 3 use cases | |
-| 1:30–2:30 | Thomas | architecture: 6 sources → Bronze / Silver / Gold → dashboard | |
-| 2:30–3:20 | Thomas | ingestion: 6 sources, 6 methods | **Step 1–2:** payments arriving now, then in Gold seconds later |
-| 3:20–4:30 | Lélia | security: roles, masking, row access | **Step 4:** analyst sees masked names and is denied raw data; compliance sees them in clear |
-| 4:30–5:40 | Lélia | cloud and IaC: Terraform with protected state, Docker job, GitHub Actions | (screenshot of the green runs) |
-| 5:40–6:40 | Lélia | costs: €0, trial credits, resource monitor, what production would cost | |
-| 6:40–7:40 | Adrien | transformation: dbt, 32 models, 43 tests, task graph | |
-| 7:40–8:30 | Adrien | serving | **Step 3:** dashboard, client C000042, pending payments, pipeline health |
-| 8:30–9:30 | Adrien | reliability: a check that fails and blocks bad data, replay, 2 incidents | screenshot (live **Step 5** only if time allows) |
-| 9:30–10:00 | Adrien | limitations, target architecture, conclusion | |
+| 0:00–0:40 | Thomas | 1 Title · 2 Agenda | |
+| 0:40–1:05 | Thomas | 3 Databank at a glance | |
+| 1:05–1:30 | Thomas | 4 Three use cases | |
+| 1:30–2:30 | Thomas | 5 Architecture | |
+| 2:30–3:20 | Thomas | 6 Six sources, six ingestion methods | **Steps 1–2:** payments arriving now, then in Gold seconds later |
+| 3:20–5:00 | Lélia | 7 Security & costs | **Step 4:** analyst sees masked names and is denied raw data; compliance sees them in clear |
+| 5:00–6:40 | Lélia | 8 Cloud & IaC (Terraform, Docker, GitHub Actions) | |
+| 6:40–8:30 | Adrien | 9 Transform & serve | **Step 3:** dashboard, client C000042, pending payments, pipeline health |
+| 8:30–9:00 | Adrien | 10 Proof it works | |
+| 9:00–9:40 | Adrien | 11 Reliability (failing check, 2 incidents) | live **Step 5** only if time allows |
+| 9:40–10:00 | Adrien | 12 Conclusion | |
 
 ## Before the defense
 
