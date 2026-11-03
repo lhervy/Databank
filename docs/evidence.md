@@ -94,7 +94,8 @@ The pipeline keeps serving correct figures, and the freshness check tells the ow
 | Task graph `T_00_ROOT → T_10_DBT_BUILD → T_20_DBT_FRESHNESS` | ran end to end with all three tasks **SUCCEEDED** (1 Nov 2026); Snowsight → Transformation → Tasks |
 | dbt full build | 32 models + 43 tests: PASS 75, ERROR 0 (1 Nov 2026) |
 | Dynamic table refreshes | `INFORMATION_SCHEMA.DYNAMIC_TABLE_REFRESH_HISTORY()`: last refresh SUCCEEDED (3 Nov 2026) |
-| GitHub Actions runs (loaders, Docker job, Terraform) | *Actions* tab of the repository, once the key is set up |
+| Automatic checks on every change (CI run #6, 3 Nov 2026) | ✅ python lint + imports, `dbt parse`, **Docker image built and smoke-tested as non-root**, **`terraform fmt` + `validate`**: [run](https://github.com/lhervy/databank-data-platform/actions/runs/41608561921) |
+| GitHub Actions runs of the loaders, the Docker job in the cloud and Terraform `apply` | *Actions* tab of the repository, once the keys are set up |
 
 ## 7. Not proven yet
 
