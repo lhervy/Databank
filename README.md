@@ -6,7 +6,6 @@ Final project for the *Data Engineering* course at Albert School (oral defense, 
 This repository contains its whole data platform: data comes from **6 different sources**, enters
 through **6 different ingestion methods**, is stored and transformed in **Snowflake on AWS (Paris region)**
 with **dbt**, and is served to a client app, analysts and the regulator.
-The whole project runs on **free tiers and free trial credits: it costs €0**.
 
 ![Architecture of the Databank data platform](docs/img/architecture.png)
 
