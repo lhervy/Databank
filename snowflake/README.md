@@ -27,6 +27,7 @@ Why is `02` before `01`? The core banking script fills the change log table, whi
 | Script | When to use it |
 |---|---|
 | [`07_live_demo.sql`](07_live_demo.sql) | about 10 minutes before a demo: turns on the live tables, the schedule and the activity simulator |
+| [`11_demo_script.sql`](11_demo_script.sql) | the queries shown during the oral defense, in order (see [docs/live_demo.md](../docs/live_demo.md)) |
 | [`98_pause_all.sql`](98_pause_all.sql) | **after every demo**: stops everything that costs credits |
 | [`99_teardown.sql`](99_teardown.sql) | after the exam only: deletes the whole platform |
 | [`90_drop_v1_prototype.sql`](90_drop_v1_prototype.sql) | removes the schemas of our first prototype (not run yet) |

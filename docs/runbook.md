@@ -36,6 +36,8 @@ Upgrading from our first prototype: run `snowflake/migrations/001_seed_from_v1.s
 
 ## Live demo (5 minutes)
 
+For the oral defense, follow [live_demo.md](live_demo.md) (running order, who says what, backups).
+
 1. About 10 minutes before: run `snowflake/07_live_demo.sql` (turns on the live tables, the schedule and
    the activity simulator).
 2. Start the card stream: GitHub → *Actions* → **A · Card terminals** → *Run workflow* (10 minutes).

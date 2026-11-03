@@ -40,7 +40,7 @@ else runs in cheaper batches (see [design_questions.md](docs/design_questions.md
 |---|---|---|---|
 | C1 | Convincing fictional company | revenue model, customers, size, stakeholders, constraints in numbers, explicit assumptions A1–A6 | [company.md](docs/company.md) |
 | C2 | Use cases and business value | 3 use cases: decision, user, metric (grain, formula, exclusions), frequency, acceptance tests | [use_cases.md](docs/use_cases.md) |
-| C3 | Working end-to-end pipeline | 6 sources, 32 dbt models; output checked against known data and an independent recomputation; documented launch; containerised job | [evidence.md](docs/evidence.md), [runbook.md](docs/runbook.md), [ingestion/Dockerfile](ingestion/Dockerfile) |
+| C3 | Working end-to-end pipeline | 6 sources, 32 dbt models; output checked against known data and an independent recomputation; documented launch; containerised job | [evidence.md](docs/evidence.md), [live_demo.md](docs/live_demo.md), [runbook.md](docs/runbook.md), [ingestion/Dockerfile](ingestion/Dockerfile) |
 | C4 | Tools appropriate to the requirements | each tool justified, alternatives and trade-offs, what we chose **not** to use | [warehouse_choice.md](docs/warehouse_choice.md), [orchestration_containers_iac.md](docs/orchestration_containers_iac.md) |
 | C5 | Actual, controlled cloud use | Snowflake on AWS Paris; loaders and a containerised job run from GitHub Actions; Terraform **applied**, state protected in an encrypted stage | [terraform/](terraform/), [evidence.md](docs/evidence.md#6-scheduling-and-run-history) |
 | C6 | Reliability, quality and operations | key, business-rule and freshness checks; a demonstrated failure; replay without double counting; task graph; 2 incident scenarios, both tested | [evidence.md](docs/evidence.md), [incidents.md](docs/incidents.md) |
@@ -164,6 +164,7 @@ Every area of the pipeline has one owner: the person who answers "who fixes it a
 | [incidents.md](docs/incidents.md) | two incident scenarios with detection, owner and recovery (both tested) |
 | [course_concepts.md](docs/course_concepts.md) | every course concept and where to find it in the project |
 | [runbook.md](docs/runbook.md) | how to deploy, run the demo, pause, and what it costs |
+| [live_demo.md](docs/live_demo.md) | the 10-minute running order (3 speakers) and the live demo, step by step |
 | [setup_github_actions.md](docs/setup_github_actions.md) | how GitHub connects to Snowflake (key pairs) |
 | [target_architecture.md](docs/target_architecture.md) | the best-case design with unlimited budget, compared with today |
 | [forecast.md](docs/forecast.md) | 2027–2030 forecast based on Gartner research and emerging tools |
