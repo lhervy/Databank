@@ -29,6 +29,10 @@ def main(action: str) -> None:
     cur = con.cursor()
     try:
         if action == "pull":
+            cur.execute(f"LIST {STAGE}/latest/")
+            if not any(row[0].endswith("latest/terraform.tfstate") for row in cur.fetchall()):
+                print("No state yet: first run")
+                return
             with tempfile.TemporaryDirectory() as tmp:
                 cur.execute(f"GET {STAGE}/latest/terraform.tfstate 'file://{tmp}/'")
                 got = Path(tmp) / "terraform.tfstate"
