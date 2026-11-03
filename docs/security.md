@@ -37,6 +37,24 @@ Security is built into the pipeline, not added at the end.
 | DORA / ACPR | resource monitor, freshness checks, task history, reproducible infra as code |
 | AML (LCB-FT) | `AML_ALERTS`, fraud score, retention of raw messages |
 
+## Verified, not just configured
+
+Each control was tested on 3 November 2026 with `USE SECONDARY ROLES NONE` (results in
+[evidence.md](evidence.md#2-access-control-allowed-and-denied)):
+
+- the analyst reads Gold with names, IBANs and birth dates masked, and is **denied** on the raw layer;
+- compliance sees the same rows in clear;
+- the client app sees only its own client's 29 payments and is **denied** on the fact table.
+
+## Secrets
+
+- Two service users, each with its own key pair: `SVC_DATABANK_INGEST` (loaders, role `DATABANK_INGEST`
+  only) and `SVC_DATABANK_TERRAFORM` (Terraform, `SYSADMIN` + `SECURITYADMIN`).
+- Private keys exist only as GitHub encrypted secrets; the Docker image receives the key at run time and
+  never contains it; `.gitignore` and `.dockerignore` exclude `*.p8`, `*.pem` and `.env`.
+- The Terraform state (which can hold sensitive values) is never committed; it lives in an encrypted stage
+  readable by `SYSADMIN` only.
+
 ## Audit and monitoring
 
 `snowflake/08_monitoring.sql`: source freshness, file load history (`COPY_HISTORY`), pipe status, task

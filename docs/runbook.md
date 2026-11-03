@@ -10,6 +10,9 @@
 | Sources D and F | ⏳ waiting for the GitHub ↔ Snowflake key (see [setup_github_actions.md](setup_github_actions.md)) |
 | dbt project + task graph | ✅ deployed, last run: 75 passed, 0 errors |
 | Dashboard | ✅ deployed |
+| Containerised job (`ingestion/Dockerfile`) | ✅ image built and checked by CI; first cloud run once the key exists |
+| Terraform (`terraform/`) | ✅ `fmt` + `validate` in CI; `apply` once the Terraform key exists |
+| Proof (drills, access tests) | ✅ logged in `OPS.EVIDENCE_LOG`, see [evidence.md](evidence.md) |
 | Snowflake ↔ GitHub link (Git workspace) | ✅ connected |
 
 ## Deploy from scratch (about 20 minutes)
@@ -43,25 +46,37 @@ Upgrading from our first prototype: run `snowflake/migrations/001_seed_from_v1.s
 
 ## Costs
 
-Measured on this account: **about 11.5 credits (≈ $34) for the whole project so far**, about $3 per credit.
+**The project costs €0.** Everything runs on the free Snowflake trial credits and free tiers (GitHub,
+GitHub Actions, Terraform, Docker, public APIs). No credit card is charged and no paid service is used.
+Costs are therefore tracked in **trial credits**, the unit Snowflake would bill for compute.
 
-| Action | Approximate cost |
+| | Trial credits |
 |---|---|
-| One full dbt build (32 models + 43 tests, ~17 s) | ~$0.05 |
-| A 1-hour live demo (live tables + dashboard) | ~$3–4 |
-| Task graph left on all day (every 15 min) | ~$5 per day: paused between demos |
-| Dashboard container left open | ~2.7 credits (~$8) per day, up to 3 days |
-| GitHub loaders, Snowpipe, storage (< 1 GB) | close to $0 |
+| Free credits included in the trial | 400 (the trial shows them as a dollar balance) |
+| Used for the whole project so far (prototype v1 + v2, drills included) | about 11.5 |
+| Guard rail: resource monitor `DATABANK_RM` | 20 credits per month; warehouses suspended at 100 % |
 
-**The dashboard was the biggest cost** (about three quarters of the total): once opened, its container
-keeps running for up to 3 days. To stop it after a demo:
+**What each action uses (measured or estimated on this account):**
 
-```sql
-ALTER COMPUTE POOL SYSTEM_COMPUTE_POOL_CPU STOP ALL;   -- it restarts the next time someone opens the app
-```
+| Action | Trial credits |
+|---|---|
+| One full dbt build (32 models + 43 tests, ~17 s on XSMALL) | ~0.02 |
+| A 1-hour live demo (live tables + warehouse) | ~1 |
+| Task graph left on every 15 minutes for a day | ~1.5 per day: paused between demos |
+| Dashboard container left open | ~2.7 per day, up to 3 days: the biggest consumer so far (about three quarters of the total) |
+| GitHub loaders, Snowpipe, storage (< 1 GB) | close to 0 |
 
-Guard rail: the resource monitor `DATABANK_RM` (20 credits per month) suspends the warehouses at 100 %.
-`99_teardown.sql` deletes everything (after the exam only).
+**Projection (assumptions):** at Databank's full size (250,000 clients, assumption A2 in
+[company.md](company.md)), card volume is 25× the prototype. With the same design, transformation stays on
+one XSMALL warehouse for most jobs (a full build of today's 300,000 rows takes 17 s), the live path runs
+during business hours only, and the dashboard container stops after each use. Estimated at about
+**60–120 credits per month** for production, against about 4 per month for the prototype as used today.
+A real bank would pay for this; our project never does.
+
+**Shutdown and clean-up procedure:**
+1. After every demo: run `snowflake/98_pause_all.sql` (stops the schedule, the simulator and the live tables).
+2. Stop the dashboard container: `ALTER COMPUTE POOL SYSTEM_COMPUTE_POOL_CPU STOP ALL;` (it restarts the next time the app is opened).
+3. After the exam: `snowflake/99_teardown.sql` deletes the whole platform; the trial then expires by itself, with nothing billed.
 
 ## Troubleshooting
 

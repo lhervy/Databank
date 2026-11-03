@@ -53,10 +53,10 @@ and where the project uses it (or why it deliberately does not).
 
 | Concept | In one line | In Databank |
 |---|---|---|
-| "Works on my laptop, crashes on the server" | the problem Docker solves | our loaders run in a fresh, identical environment on every GitHub Actions run (pinned Python 3.11 + `requirements.txt`) |
+| "Works on my laptop, crashes on the server" | the problem Docker solves | the ECB loader runs inside our Docker image in GitHub Actions: same pinned Python and libraries everywhere |
 | Image vs container | the package vs a running copy of it | the Streamlit dashboard runs as a **container** in Snowflake (container runtime on a compute pool) |
-| One container per source | isolate dependencies per loader | each loader is its own job with its own run; a Dockerfile per loader is the next step |
-| When **not** to use Docker | keep it simple when the platform already runs the code | dbt runs as a native dbt Project in Snowflake and orchestration uses Snowflake tasks, so no container is needed there |
+| One container per source | isolate dependencies per loader | one pinned loader image ([`ingestion/Dockerfile`](../ingestion/Dockerfile)); each run starts a container for one source, loads into Bronze, stops |
+| When **not** to use Docker | keep it simple when the platform already runs the code | dbt runs as a native dbt Project in Snowflake and orchestration uses Snowflake tasks, so no container there |
 
 Full discussion: [orchestration_containers_iac.md](orchestration_containers_iac.md#2-containers-docker).
 
@@ -71,7 +71,7 @@ Full discussion: [orchestration_containers_iac.md](orchestration_containers_iac.
 | Resource management | start and stop compute at the right time | warehouses resume on demand and suspend after 60 s; the schedule is paused between demos |
 | Monitoring | see what ran and what failed | task history, `OPS.SOURCE_FRESHNESS`, `OPS.FILE_LOADS`, dashboard "Pipeline health" tab |
 | Airflow / Dagster | external orchestrators | not needed at our size: the course's own advice is to use internal warehouse features (Snowflake tasks) first |
-| Infrastructure as Code | infrastructure described in versioned files | every Snowflake object is created by a versioned, re-runnable SQL script in [snowflake/](../snowflake/); the Terraform version is described as the next step |
+| Infrastructure as Code | infrastructure described in versioned files | [terraform/](../terraform/): warehouse, schema, role and grants, provider pinned, state protected in an encrypted stage; core platform in re-runnable SQL scripts |
 
 Full discussion: [orchestration_containers_iac.md](orchestration_containers_iac.md).
 

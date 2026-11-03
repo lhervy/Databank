@@ -116,6 +116,9 @@ being rebuilt.
 
 ## 5. What it would cost (order of magnitude)
 
+> Illustrative only: this is what a real bank would pay for the target design. Our project itself uses
+> only free tiers and free trial credits and costs €0.
+
 These are rough monthly ranges for a mid-sized retail bank (a few million clients), not quotes. The point
 is the **order of magnitude** and **where the money goes**.
 

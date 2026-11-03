@@ -38,10 +38,10 @@ The tools help the owner find the problem quickly:
 
 | If this breaks… | You see it in… | Owner |
 |---|---|---|
-| A loader (A, D, E, F) | the red run in GitHub Actions + `OPS.SOURCE_FRESHNESS` | Ingestion |
-| A file load | `OPS.FILE_LOADS` (file name, rows, first error) | Ingestion |
-| CDC capture | task `T_00_ROOT` in task history | Core banking & governance |
-| A dbt model or test | task `T_10_DBT_BUILD`, dbt output | Transformation & serving |
+| A loader (A, D, E, F) | the red run in GitHub Actions + `OPS.SOURCE_FRESHNESS` | Ingestion (Thomas) |
+| A file load | `OPS.FILE_LOADS` (file name, rows, first error) | Ingestion (Thomas) |
+| CDC capture | task `T_00_ROOT` in task history | Core banking & governance (Lélia) |
+| A dbt model or test | task `T_10_DBT_BUILD`, dbt output | Transformation & serving (Adrien) |
 | A late source | task `T_20_DBT_FRESHNESS` warns | whoever owns that source |
 
 We did **not** use a data mesh (each business domain owning its own data). The course notes that a mesh fits
@@ -73,7 +73,7 @@ between clouds because everything is on AWS Paris.
 | No streaming by default | the live parts run only during demos (`07_live_demo.sql` / `98_pause_all.sql`) |
 | Serverless where it is cheaper | Snowpipe for files, no warehouse kept running |
 
-Measured cost and per-action estimates: [runbook.md](runbook.md#costs).
+The project itself costs €0 (free trial credits). Credits used per action and a projection: [runbook.md](runbook.md#costs).
 
 ## 6. Security: where is personal data, and who can see it?
 

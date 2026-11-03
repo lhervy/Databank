@@ -1,0 +1,46 @@
+name: "Terraform · Snowflake resources (plan / apply)"
+
+# Started by hand. "plan" shows the changes and changes nothing; "apply" makes them.
+# One run at a time (concurrency group = state lock). State is pulled from and pushed to
+# the encrypted stage DATABANK.OPS.TF_STATE, never committed to Git.
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "plan or apply"
+        default: "plan"
+        type: choice
+        options: [plan, apply]
+
+concurrency: { group: terraform-state, cancel-in-progress: false }
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT || 'xedwtqk-wk19730' }}
+      SNOWFLAKE_USER: SVC_DATABANK_TERRAFORM
+      SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_TF_PRIVATE_KEY }}   # read by the provider and by state_sync.py
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11", cache: pip, cache-dependency-path: ingestion/requirements.txt }
+      - run: pip install -r ingestion/requirements.txt
+      - uses: hashicorp/setup-terraform@v3
+        with: { terraform_version: "1.9.8", terraform_wrapper: false }
+      - name: Pull the remote state
+        run: python terraform/state_sync.py pull
+      - name: terraform init
+        working-directory: terraform
+        run: terraform init -input=false
+      - name: terraform plan
+        working-directory: terraform
+        run: terraform plan -input=false -out=tfplan
+      - name: terraform apply (only when asked)
+        if: inputs.action == 'apply'
+        working-directory: terraform
+        run: terraform apply -input=false tfplan
+      - name: Push the new state version
+        if: always() && inputs.action == 'apply'
+        run: python terraform/state_sync.py push

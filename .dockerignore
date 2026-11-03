@@ -1,0 +1,13 @@
+# Keep keys, secrets and unrelated folders out of the image
+.git
+.github
+**/*.p8
+**/*.pem
+**/rsa_key*
+**/.env
+**/__pycache__
+dbt/
+docs/
+snowflake/
+streamlit/
+terraform/

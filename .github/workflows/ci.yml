@@ -28,3 +28,25 @@ jobs:
       - name: dbt parse (validates models, refs, sources, tests - no warehouse needed)
         working-directory: dbt/databank
         run: dbt parse --profiles-dir .
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the loader image (no secret needed)
+        run: docker build -f ingestion/Dockerfile -t databank-loader:ci .
+      - name: Smoke test inside the container (imports, runs as non-root)
+        run: |
+          docker run --rm databank-loader:ci python -c "import ingestion.a_tpe_stream.producer, ingestion.d_ecb_api.ingest_ecb_fx, ingestion.e_bdf_snowpipe.load_bdf_registry, ingestion.f_app_events.load_app_events; print('imports ok')"
+          test "$(docker run --rm databank-loader:ci id -u)" = "10001"
+
+  terraform:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: terraform } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with: { terraform_version: "1.9.8" }
+      - run: terraform fmt -check -recursive
+      - run: terraform init -backend=false
+      - run: terraform validate

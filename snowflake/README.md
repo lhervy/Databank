@@ -13,11 +13,12 @@ rebuilt from this folder (see [docs/orchestration_containers_iac.md](../docs/orc
 | 2 | [`02_raw_landing.sql`](02_raw_landing.sql) | file formats, stages, landing tables for A, D, E, F, the Snowpipe for E | ingest |
 | 3 | [`01_core_banking.sql`](01_core_banking.sql) | the simulated core banking system (source B), its streams and the CDC procedure | ingest |
 | 4 | [`03_marketplace_share.sql`](03_marketplace_share.sql) | access to the free Marketplace data (source C) | ingest |
-| 5 | [`04_service_user_github.sql`](04_service_user_github.sql) | the service user GitHub Actions logs in with (key pair) | ingest |
+| 5 | [`04_service_user_github.sql`](04_service_user_github.sql) | the two service users GitHub Actions logs in with (loaders, Terraform; key pairs) and the encrypted Terraform state stage | ingest + IaC |
 | 6 | [`05_security.sql`](05_security.sql) | permissions per role, masking policies, row access policy | security |
 | 7 | [`06_dbt_deploy_and_dag.sql`](06_dbt_deploy_and_dag.sql) | runs dbt, then creates the task graph (DAG) | transform + orchestrate |
 | 8 | [`08_monitoring.sql`](08_monitoring.sql) | monitoring views in `OPS` (freshness, file loads, task runs, credits) | operate |
 | 9 | [`09_git_integration.sql`](09_git_integration.sql) | link between Snowflake and this GitHub repository | operate |
+| 10 | [`10_evidence_drills.sql`](10_evidence_drills.sql) | reproduces the proof: known-data checks, access tests, replay, failing test, outage | operate |
 
 Why is `02` before `01`? The core banking script fills the change log table, which is created in `02`.
 

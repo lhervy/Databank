@@ -71,55 +71,61 @@ Managed Airflow on AWS (MWAA) would keep us on one cloud.
 a different operating system. A Docker **image** packages the code with its runtime and libraries; a
 **container** is a running copy of that image, identical everywhere.
 
-### Where containers already appear in Databank
+### Our containerised job
+
+The loaders are packaged as one Docker image, [`ingestion/Dockerfile`](../ingestion/Dockerfile), and the
+daily ECB job (source D) runs **inside that container** in GitHub Actions
+([`ingest-d-ecb-fx-api.yml`](../.github/workflows/ingest-d-ecb-fx-api.yml)): build the image, then
+`docker run` the loader, which loads into Bronze and stops.
+
+It follows the four Docker reflexes from the course:
+
+| Reflex | In our Dockerfile |
+|---|---|
+| Pinned base image and dependencies | `python:3.11.14-slim`; every library pinned with `==` in `ingestion/requirements.txt` |
+| Dependencies installed before the code is copied | `requirements.txt` first, then `ingestion/`, so the dependency layer is cached |
+| No secret inside the image | the private key is passed with `docker run -e SNOWFLAKE_PRIVATE_KEY` at run time; `.dockerignore` excludes keys and `.env` |
+| Non-root user | `USER loader` (uid 10001); CI checks it on every change |
+
+On every change to the repository, CI builds the image and runs a smoke test inside it (imports, non-root user).
+
+### Other places where containers appear
 
 | Part | How it is isolated and reproducible |
 |---|---|
-| Loaders (A, D, E, F) | each GitHub Actions run starts on a brand-new, disposable machine with a pinned Python 3.11 and the versions in `ingestion/requirements.txt`, then the machine is deleted: the same idea as "start → load into Bronze → stop" from the course |
-| Automatic checks (CI) | every change to the repo is checked (Python lint + `dbt parse`) on a fresh machine before it reaches production |
+| Other loaders (A, E, F) | run on brand-new, disposable GitHub Actions machines with the same pinned versions; they can use the same image (`docker run … python -m ingestion.<loader>`) |
 | Dashboard | the Streamlit app runs as a **container** inside Snowflake (container runtime on a compute pool) |
 
 ### Where we deliberately do not use Docker
 
 The course slide "When not to use Docker" says: keep it simple when the platform already runs the code,
-for example *dbt Projects or Tasks in Snowflake, no container*. That is exactly our case:
+for example *dbt Projects or Tasks in Snowflake, no container*. That is our case for transformation:
 
 - dbt runs as a native **dbt Project** inside Snowflake, with a fixed dbt version managed by Snowflake;
 - orchestration uses Snowflake tasks.
 
 Adding containers there would add images to build, store and update, with no benefit.
 
-### Next step if the platform grows
-
-One image per loader (one container per source, as in the course), built from a `Dockerfile` such as:
-
-```dockerfile
-FROM python:3.11-slim
-WORKDIR /app
-COPY ingestion/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY ingestion/ ingestion/
-CMD ["python", "-m", "ingestion.d_ecb_api.ingest_ecb_fx"]
-```
-
-The images would be pushed to the Snowflake image repository and run as Snowflake jobs, or run by Airflow.
-
 ## 3. Infrastructure as Code (Terraform)
 
-### What we do today
+### What we do
 
 Infrastructure as Code means describing the infrastructure in versioned files instead of clicking in a
-console. Databank already follows this principle with SQL:
+console. Databank uses two layers:
 
-- every warehouse, database, schema, role, stage, pipe, policy and task is created by a script in
-  [`snowflake/`](../snowflake/), numbered in run order;
-- the scripts are **re-runnable** (`CREATE … IF NOT EXISTS`), so running them again does not break anything;
-- they are versioned in Git, reviewed like any other code, and the whole platform can be rebuilt from them
-  (see [runbook.md](runbook.md)).
+- **Terraform** ([`terraform/`](../terraform/)) declares the resources added since the first build: the
+  dashboards' warehouse `DATABANK_BI_WH` (through a reusable module), the schema `EVIDENCE` and a
+  read-only role for reviewers with its grants. Provider pinned, `plan` before `apply`, run from GitHub
+  Actions with its own service user and key.
+- **Protected state:** never in Git; stored in an encrypted Snowflake stage (`OPS.TF_STATE`), one version
+  per run, one run at a time (lock), readable by `SYSADMIN` only. Free, no extra account.
+- **Re-runnable SQL scripts** in [`snowflake/`](../snowflake/) built the core platform before Terraform
+  (`CREATE … IF NOT EXISTS`, versioned in Git). Bringing them under Terraform with `import` blocks is the
+  next step; the remaining manual steps are listed in [`terraform/README.md`](../terraform/README.md).
 
-### What Terraform would add
+### SQL scripts vs Terraform
 
-| | SQL scripts (today) | Terraform |
+| | SQL scripts | Terraform |
 |---|---|---|
 | Describes the infrastructure in files | ✅ | ✅ |
 | Versioned in Git | ✅ | ✅ |
@@ -128,11 +134,7 @@ console. Databank already follows this principle with SQL:
 | Removes drift (manual changes made in the console) | ❌ | ✅ |
 | Manages AWS and Snowflake with the same tool | ❌ | ✅ (providers `hashicorp/aws` and `snowflakedb/snowflake`) |
 
-For a student project on a trial account, the SQL scripts were simpler. For a real bank,
-Terraform would be the right choice, because regulators ask for a reproducible, auditable infrastructure
-(DORA).
-
-### What it would look like
+### What the core setup would look like in Terraform
 
 The first lines of `00_account_setup.sql`, written in Terraform (HashiCorp Configuration Language):
 
@@ -176,6 +178,6 @@ The S3 bucket for the optional auto-ingest (source F) would be declared in the s
 |---|---|
 | 1 · Git: versioned code | ✅ everything is in this repository |
 | 2 · Git: CI/CD | ✅ automatic checks on every change (`ci.yml`) + scheduled loaders in GitHub Actions |
-| 3 · Docker | partly: disposable runners and a containerised dashboard; Dockerfiles per loader are the next step |
-| 4 · Terraform | principle applied with re-runnable SQL scripts; Terraform version described above |
+| 3 · Docker | ✅ loader image (pinned, non-root, no secret) run as a container job; containerised dashboard |
+| 4 · Terraform | ✅ warehouse, schema, role and grants in Terraform with protected remote state; core platform in re-runnable SQL |
 | 5 · Kubernetes | not needed: no long-running services to replicate |

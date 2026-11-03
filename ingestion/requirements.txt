@@ -1,4 +1,6 @@
-snowflake-connector-python[pandas]>=3.12
-snowflake-ingest>=1.0.10
-cryptography>=42
-requests>=2.32
+# Pinned versions: the same libraries everywhere (laptop, GitHub Actions, Docker image).
+snowflake-connector-python[pandas]==5.1.0
+snowflake-ingest==1.0.13
+cryptography==50.0.2
+requests==2.33.0
+pandas==2.3.3

@@ -12,7 +12,7 @@ Every technical word used in this repository, in plain language.
 | **Compute pool** | A group of machines in Snowflake that runs containers (used here by the dashboard). |
 | **Container / image (Docker)** | An image is a package of code + runtime + libraries; a container is a running copy of it, identical on every machine. |
 | **COPY INTO** | The Snowflake command that loads files from a stage into a table. |
-| **Credit** | Snowflake's unit of compute cost (about $3 on this account). |
+| **Credit** | Snowflake's unit of compute. Our trial includes 400 free credits; the project has used about 11.5 and paid nothing. |
 | **DAG** | Directed acyclic graph: a chain of tasks where each task waits for the ones before it, with no loops. |
 | **dbt** | A tool to write transformations as SQL files, with tests and documentation, and run them in the right order. |
 | **dbt model / test / source** | A model is one SQL file that builds one table or view; a test checks a rule on the data; a source is a raw table dbt reads but does not build. |
