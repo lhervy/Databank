@@ -45,7 +45,7 @@ password manager.
 | **D · ECB FX rates** | the containerised job runs in the cloud and loads real ECB rates |
 | **E · Banque de France registry** | file → stage → Snowpipe |
 | **F · Mobile app events** | file → stage → `COPY INTO` |
-| **A · Card terminals** (10 minutes) | micro-batch streaming, live balance in the app |
+| **A · Card terminals** (on demand, 20 minutes by default) | micro-batch streaming, live balance in the app |
 | **Terraform** with `plan`, then `apply` | infrastructure as code with protected state |
 
 Or from a terminal:

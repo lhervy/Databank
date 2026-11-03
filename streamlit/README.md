@@ -5,9 +5,13 @@ It reads **only Gold tables** (`MARTS`) and monitoring views (`OPS`), never raw 
 
 | Tab | What it shows | Use case |
 |---|---|---|
-| **Client view** | a client's available balance, pending card payments, latest payments, spending by category, portfolio value | 1 (live payments), 2 (investments), 3 (personal dashboard) |
-| **Markets** | real stock prices of the shares clients hold; EUR/USD from two independent sources | 2 (reliable market data) |
-| **Pipeline health** | freshness of each source, quarantined messages, ingestion delay | monitoring ("who fixes it at 3 a.m.?") |
+| **Client view** | 4 key-figure cards (available balance, pending card payments, portfolio value, fraud alerts), latest payments, spending by category, portfolio ring chart | UC1 (live balance), UC2 (spending and portfolio) |
+| **Markets** | real share prices of the stocks clients hold (1 year), EUR/USD from the ECB API and the Marketplace on one chart | UC2 (reliable market data) |
+| **Pipeline health** | one card per source with its status (Fresh / Late / Stale), quarantined messages, ingestion delay in the last hour | monitoring ("who fixes it at 3 a.m.?"), UC3 |
+
+**Look and feel:** same colours as the presentation (greens, Poppins), set in the app's CSS and in
+[`.streamlit/config.toml`](.streamlit/config.toml) (light theme). The client list starts with a client who
+has a portfolio and pending payments, so every chart has data during the demo.
 
 ## How to open it
 

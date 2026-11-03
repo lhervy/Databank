@@ -40,8 +40,8 @@ For the oral defense, follow [live_demo.md](live_demo.md) (running order, who sa
 
 1. About 10 minutes before: run `snowflake/07_live_demo.sql` (turns on the live tables, the schedule and
    the activity simulator).
-2. Start the card stream: GitHub → *Actions* → **A · Card terminals** → *Run workflow* (10 minutes).
-3. Open the dashboard, pick a client, show the pending payments and the balance changing (about 1 minute).
+2. Start the card stream: GitHub → *Actions* → **A · Card terminals** → *Run workflow* (20 minutes, the default).
+3. Open the dashboard (the first client in the list has a portfolio and pending payments), show the pending payments and the balance (about 1 minute).
 4. Show the lineage (dbt graph) and the governance: query `MARTS.DIM_CLIENTS` as `DATABANK_ANALYST`
    (names masked), then as `DATABANK_COMPLIANCE` (names visible).
 5. Afterwards: run `snowflake/98_pause_all.sql` and stop the dashboard (see below).

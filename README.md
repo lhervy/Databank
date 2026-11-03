@@ -44,7 +44,7 @@ else runs in cheaper batches (see [design_questions.md](docs/design_questions.md
 | C5 | Actual, controlled cloud use | Snowflake on AWS Paris; loaders and a containerised job run from GitHub Actions; Terraform **applied**, state protected in an encrypted stage | [terraform/](terraform/), [evidence.md](docs/evidence.md#6-scheduling-and-run-history) |
 | C6 | Reliability, quality and operations | key, business-rule and freshness checks; a demonstrated failure; replay without double counting; task graph; 2 incident scenarios, both tested | [evidence.md](docs/evidence.md), [incidents.md](docs/incidents.md) |
 | C7 | Security and costs | allowed/denied access verified; masked personal data; secrets out of the code; cost in free credits + projection; budget cap and shutdown procedure | [security.md](docs/security.md), [runbook.md](docs/runbook.md#costs) |
-| C8 | Slides and presentation | storyline, architecture, evidence, limitations, speaking order | slide deck + [Section 13](#13-limitations) |
+| C8 | Slides and presentation | 14-slide deck (Canva), 15 minutes, 3 speakers; storyline, architecture, evidence, best case, forecast, limitations | slide deck + [live_demo.md](docs/live_demo.md) + [Section 13](#13-limitations) |
 
 Also covered from the course brief: several kinds of sources (terminals, internal database, marketplace,
 public API, regulator files, app logs), several ingestion methods and no drag and drop, one cloud, dbt,
@@ -118,7 +118,7 @@ Each folder is one stage of the pipeline and has its own README explaining what 
 databank-data-platform/
 ├── README.md               ← you are here
 ├── docs/                   ← all documentation (start with architecture.md)
-│   └── img/                ← architecture diagram
+│   └── img/                ← the three diagrams (today, best case, forecast) + the script that draws them
 ├── snowflake/              ← SQL that builds the platform, numbered in run order (00 → 09)
 ├── ingestion/              ← Python loaders, one folder per source (a_, d_, e_, f_)
 ├── .github/workflows/      ← schedules that run the loaders + automatic checks on every change
@@ -163,7 +163,7 @@ Every area of the pipeline has one owner: the person who answers "who fixes it a
 | [incidents.md](docs/incidents.md) | two incident scenarios with detection, owner and recovery (both tested) |
 | [course_concepts.md](docs/course_concepts.md) | every course concept and where to find it in the project |
 | [runbook.md](docs/runbook.md) | how to deploy, run the demo, pause, and what it costs |
-| [live_demo.md](docs/live_demo.md) | the 10-minute running order (3 speakers) and the live demo, step by step |
+| [live_demo.md](docs/live_demo.md) | the 15-minute running order (3 speakers) and the live demo, step by step |
 | [setup_github_actions.md](docs/setup_github_actions.md) | how GitHub connects to Snowflake (key pairs) |
 | [target_architecture.md](docs/target_architecture.md) | the best-case design with unlimited budget, compared with today |
 | [forecast.md](docs/forecast.md) | 2027–2030 forecast based on Gartner research and emerging tools |
@@ -174,29 +174,65 @@ Every area of the pipeline has one owner: the person who answers "who fixes it a
 | | |
 |---|---|
 | Clients / accounts / merchants | 10,000 / 13,583 / 400 |
-| Card messages received → valid transactions | 303,295 → 299,747 (557 quarantined, the rest were duplicates) |
+| Card messages received → valid transactions | 303,295 → 299,747 (557 quarantined, the rest were duplicates); 301,118 in Gold after the cloud stream of 3 Nov |
 | Investment positions valued with real prices | 10,575 |
 | dbt build (32 models + 43 tests) | 75 passed, 0 errors, about 17 seconds |
 | Business output vs independent recomputation (15 Oct 2026) | 3,333 payments, €176,580.44 in both |
 | Cost of the project | €0: about 11.5 of the 400 free trial credits used, nothing paid |
 
-## 11. And with an unlimited budget?
+## 11. Best case: the same pipeline with unlimited budget
 
-We also designed the **best-case version** of this pipeline: Kafka and Flink for millisecond fraud checks,
-an open Iceberg lakehouse, managed connectors, machine learning, Airflow, Terraform and a second region
-for disaster recovery. It keeps the same cloud, warehouse, layers and dbt models, so today's pipeline can
-grow into it step by step.
+**Why we did it.** A data platform is a set of trade-offs. To show which of our choices come from the
+€0 budget and which would stay with any budget, we redesigned the pipeline as if Databank could pay for
+the best platforms available today.
 
-[![Target architecture](docs/img/target_architecture.png)](docs/target_architecture.md)
+**How we built it.** We started from today's diagram and changed only what a bigger budget would really
+improve, step by step, keeping a reason for every change ([target_architecture.md](docs/target_architecture.md)).
 
-Full comparison, costs and migration plan: [docs/target_architecture.md](docs/target_architecture.md).
+[![Best-case architecture](docs/img/target_architecture.png)](docs/target_architecture.md)
 
-## 12. Where it is heading (2027–2030)
+*Green outlines = new or upgraded compared with today; dark-teal band = new real-time path (H1–H4);
+numbers = the steps explained in the document.*
 
-Based on Gartner's research (AI-ready data, the shift to event streaming, AI agents and their failure
-rates, decision governance, semantic layers, open table formats, sovereignty) and the EU AI Act deadline
-for credit scoring (2 December 2027), we forecast how Databank's platform should evolve, with three
-scenarios and a watchlist of emerging tools: [docs/forecast.md](docs/forecast.md).
+**What stays:** one cloud (AWS Paris), Snowflake, the Bronze → Silver → Gold layers and the same dbt
+models. Today's pipeline can grow into the target step by step, without being rebuilt.
+**What changes:** a real-time hot path (Kafka and Flink) that scores fraud **before** a payment is
+accepted and updates the app in under a second; an open lakehouse (Apache Iceberg) for raw data;
+managed connectors instead of our scripts; an AI / ML layer; Airflow, observability, governance and a
+second region (Frankfurt) as platform services.
+
+**The example we use in the defense.** Camille pays €12.40 for lunch at a bakery in Lyon:
+
+| Step of the payment | Today | Best case |
+|---|---|---|
+| Reaches the bank | micro-batch, within 10 s | Kafka event, immediately |
+| Fraud check | rule, after the payment is accepted | score in < 100 ms, before it is accepted |
+| Camille sees it | pending payment in < 2 min | push notification in < 1 s |
+| Reports | dbt every 15 min | same dbt models, on Iceberg, run by Airflow |
+
+Costs (illustrative, never spent), migration plan and what we would still not do:
+[docs/target_architecture.md](docs/target_architecture.md).
+
+## 12. Forecast 2026 → 2030
+
+**Why we did it.** The tools and the rules for bank data are changing fast (AI agents, event streaming,
+the EU AI Act). We wanted to check that our design still makes sense in a few years.
+
+**How we built it.** We took Gartner's published predictions (top row of the picture, with sources),
+the EU AI Act deadline for credit scoring (2 December 2027) and tools announced in 2026, then wrote what
+we expect for Databank year by year, on three lanes: data and streaming, AI and agents, governance
+([forecast.md](docs/forecast.md)).
+
+[![Forecast 2026-2030](docs/img/forecast_roadmap.png)](docs/forecast.md)
+
+**The same payment, year by year:** in 2027 it arrives as an event and a data contract checks it at the
+door; in 2028 it is scored before it is accepted and, if suspicious, an AI agent prepares the alert for a
+person to decide; in 2029–2030 an agent may freeze Camille's card for a few minutes if it is used in two
+cities at once, and a person reviews it.
+
+**The conclusion we draw:** AI only works on data that is clean, governed and traceable, so the first
+steps are foundations (contracts, Terraform, streaming), not AI. Scenarios and the tool watchlist:
+[docs/forecast.md](docs/forecast.md).
 
 ## 13. Limitations
 
@@ -210,6 +246,10 @@ We state them openly; each one has a planned next step.
 | The fraud score is rule-based (1.3 % of payments flagged) | many false positives for compliance | machine-learning model (target architecture) |
 | The live table refreshes before tests run | a bad record can appear there for a minute (seen in the drill) | filter impossible values in staging |
 | Free Marketplace data is 3 months behind | portfolio prices are not current | paid feed in production (never in this project) |
+
+## 14. Usage of AI
+
+*To be completed by the team.*
 
 ---
 

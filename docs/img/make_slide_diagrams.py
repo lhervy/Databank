@@ -1,7 +1,8 @@
-"""Slide versions of the three diagrams, in the colours of the Canva deck (greens, Poppins), with icons.
+"""The three diagrams of the project, in the colours of the Canva deck (greens, Poppins), with icons.
 
-Writes slide_current.svg, slide_target.svg, slide_forecast.svg next to this file.
-Render: node render.js <svg> <png> <width> <height>  (any browser screenshot works).
+Writes architecture.svg (today), target_architecture.svg (best case) and forecast_roadmap.svg next to this
+file; the same images are used in the docs and on slides 5, 12 and 13.
+Render to PNG with any browser screenshot at 2x (we used Playwright: 1840x840, 1840x900, 1840x860).
 Icons are simple generic line icons drawn here (no brand logos); tool names are written as text.
 """
 import html
@@ -89,8 +90,9 @@ class SVG:
             self.text(x + w - tw / 2 - 8, y + 22, tag, 11, WHITE, "middle", 700)
 
     def num(self, x, y, n, col=GREEN, r=13):
-        self.a(f'<circle cx="{x}" cy="{y}" r="{r}" fill="{col}"/>')
-        self.text(x, y + 4.5, str(n), 12.5, WHITE, "middle", 700)
+        r = max(r, 15) if len(str(n)) > 1 else r
+        self.a(f'<circle cx="{x}" cy="{y}" r="{r}" fill="{col}" stroke="{WHITE}" stroke-width="2"/>')
+        self.text(x, y + 4.5, str(n), 12.5 if len(str(n)) < 3 else 11, WHITE, "middle", 700)
 
     def arrow(self, x1, y1, x2, y2, col=LINE, w=2.2, mk="ah", dash=None):
         d = f' stroke-dasharray="{dash}"' if dash else ''
@@ -149,13 +151,14 @@ def current():
     for i, (ic, t, sub) in enumerate(chips):
         x = 690 + i * 255
         s.card(x, 718, 240, 90, t, sub, ic, fill=WHITE, stroke=GREEN, ts=14.5, ss=12)
+        s.num(x + 6, 724, 7 + i, DARK)
     cons = [("phone", "Mobile app", ["live balance < 2 min", "own rows only"]), ("monitor", "Dashboard", ["Streamlit", "clients · advisors · ops"]),
             ("bank", "Regulators", ["Banque de France", "AML → Tracfin"]), ("users", "Analysts", ["SQL on Gold", "masked personal data"])]
     for i, (ic, t, sub) in enumerate(cons):
         y = 80 + i * 190
         s.card(1500, y, 320, 130, t, sub, ic, ts=18, ss=13)
         s.arrow(1440, y + 65, 1498, y + 65)
-    s.save("slide_current.svg")
+    s.save("architecture.svg")
 
 
 # =====================================================================  2. BEST CASE
@@ -169,6 +172,7 @@ def target():
     for i, (ic, t, sub) in enumerate(hot):
         x = 350 + i * 365
         s.card(x, 50, 330, 70, t, sub, ic, stroke=HOT, ts=14.5, ss=12)
+        s.num(x + 4, 52, f"H{i + 1}", HOT)
         if i < 3:
             s.arrow(x + 330, 85, x + 363, 85, col=HOT, mk="ahh")
     # columns
@@ -186,6 +190,7 @@ def target():
         ic, t, tag = srcs[i]
         s.card(14, y, 272, h, t, (), ic, fill=(PALE if tag == "REAL" else WHITE), stroke=(GREEN if tag else LIGHT), ts=14, tag=tag)
         s.card(312, y + 6, 262, h - 12, ing[i], (), ts=13, center=True, stroke=GREEN if i in (0, 1, 2, 4, 5, 6) else LIGHT)
+        s.num(314, y + 8, i + 1)
         s.arrow(286, cy, 310, cy); s.arrow(574, cy, 618, cy)
     s.poly([(580, y0 + 18), (590, y0 + 18), (590, 136)], col=HOT, mk="ahh", dash="5 4")
     s.card(620, y0 + 10, 180, 7 * (h + g) - 28, "BRONZE", ["Apache Iceberg", "on S3", "", "open format,", "any engine"], "layers", ts=16, ss=12.5)
@@ -217,8 +222,9 @@ def target():
     for i, (ic, t, sub) in enumerate(bands):
         x = 170 + i * 278
         s.card(x, 740, 262, 96, t, sub, ic, fill=WHITE, stroke=GREEN, ts=14.5, ss=12)
-    s.text(14, 878, "Green outline = new or upgraded compared with today  ·  Dark teal = new real-time hot path  ·  Same Bronze / Silver / Gold layers and dbt models as today", 13, GREY)
-    s.save("slide_target.svg")
+        s.num(x + 6, 746, 8 + i, DARK)
+    s.text(14, 878, "Green outline = new or upgraded compared with today  ·  Dark teal = new real-time hot path (H1–H4)  ·  Numbers = steps in docs/target_architecture.md  ·  Same layers and dbt models as today", 13, GREY)
+    s.save("target_architecture.svg")
 
 
 # =====================================================================  3. FORECAST
@@ -275,7 +281,7 @@ def forecast():
         card(i, 454, 160, *ai[i], "now" if i == 0 else "fut")
         card(i, 628, 170, *gov[i], "now" if i == 0 else "fut")
     s.text(10, 836, "Grey = Gartner published predictions and the EU AI Act deadline (sources in docs/forecast.md)  ·  Dark outline = what Databank runs today  ·  Green outline = our forecast", 13, GREY)
-    s.save("slide_forecast.svg")
+    s.save("forecast_roadmap.svg")
 
 
 if __name__ == "__main__":

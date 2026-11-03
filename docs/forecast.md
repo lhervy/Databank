@@ -9,6 +9,8 @@ scenarios are **our own forecast**, built on those signals.
 
 ![Forecast roadmap](img/forecast_roadmap.png)
 
+*Top row (grey): what Gartner publishes. Dark outline: what Databank runs today. Green outlines: our forecast, year by year.*
+
 ## 1. The eight forces that will shape the platform
 
 ### 1.1 No AI-ready data, no AI
@@ -105,6 +107,17 @@ that an assistant can explore to explain *why* an alert was raised.
 | **2027** | Terraform and separate dev / test / prod; data contracts on every source; Kafka + log-based CDC for payments and core banking; AI assistant for analysts on Gold data only; credit-risk model ready for EU AI Act obligations (December) | AI-ready data (1.1), regulation (1.8), streaming (1.2) |
 | **2028** | Most flows event-driven; Flink fraud scoring before payment; Bronze on Iceberg; metrics defined once in a semantic layer; first agents in operations (alert triage, report drafting) with a human approving | streaming (1.2), agents (1.3), lakehouse (1.7), semantic layer (1.6) |
 | **2029–2030** | Decision governance in production: every automated decision logged and explainable; data contracts drafted by agents and approved by humans; graph-based AML; the platform serves AI agents as much as dashboards | decision governance (1.4), contracts (1.5), GraphRAG |
+
+### The same payment, year by year
+
+The example from the oral defense: Camille pays €12.40 for lunch at a bakery in Lyon.
+
+| Year | What happens to her payment | What changed |
+|---|---|---|
+| Today (2026) | arrives in a 10-second batch; a rule checks fraud after it is accepted; she sees it in under 2 minutes | what we built |
+| 2027 | arrives as an event; a data contract checks the message format the moment it enters the bank | streaming foundations, data contracts |
+| 2028 | scored for fraud before it is accepted; if suspicious, an AI agent prepares the alert and a person decides | real-time scoring, supervised agents |
+| 2029–2030 | if her card is used in Marseille 10 minutes later, an agent may freeze it for a few minutes (small, reversible) and a person reviews it | decision governance in production |
 
 ## 3. Three scenarios for 2030 (our judgment)
 

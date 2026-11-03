@@ -1,111 +1,155 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="860" viewBox="0 0 1800 860" font-family="Arial, Helvetica, sans-serif">
-<rect width="1800" height="860" fill="#FFFFFF"/>
-<text x="30" y="44" text-anchor="start" font-size="26" font-weight="700" fill="#0F1B2D">Databank · forecast 2026 → 2030, based on Gartner signals</text>
-<text x="30" y="70" text-anchor="start" font-size="15" font-weight="400" fill="#5F6673">Top: what Gartner predicts (published figures) · Below: what we expect for Databank (our forecast)</text>
-<rect x="230" y="88" width="380" height="44" rx="8" fill="#1E6FA8"/>
-<text x="420.0" y="116" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">TODAY · 2026  ·  what we built</text>
-<rect x="622" y="88" width="380" height="44" rx="8" fill="#0F1B2D"/>
-<text x="812.0" y="116" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">2027  ·  foundations</text>
-<rect x="1014" y="88" width="380" height="44" rx="8" fill="#0F1B2D"/>
-<text x="1204.0" y="116" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">2028  ·  real time</text>
-<rect x="1406" y="88" width="380" height="44" rx="8" fill="#0F1B2D"/>
-<text x="1596.0" y="116" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">2029 – 2030  ·  governed AI</text>
-<line x1="230" y1="146" x2="1786" y2="146" stroke="#C9D2DC" stroke-width="3"/>
-<rect x="30" y="160" width="185" height="150" rx="10" fill="#F4F7FA" stroke="#C9D2DC"/>
-<text x="122" y="231.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">Gartner</text>
-<text x="122" y="251.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">signals</text>
-<rect x="30" y="322" width="185" height="140" rx="10" fill="#F4F7FA" stroke="#C9D2DC"/>
-<text x="122" y="388.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">Data &amp;</text>
-<text x="122" y="408.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">streaming</text>
-<rect x="30" y="474" width="185" height="140" rx="10" fill="#F4F7FA" stroke="#C9D2DC"/>
-<text x="122" y="540.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">AI &amp;</text>
-<text x="122" y="560.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">agents</text>
-<rect x="30" y="626" width="185" height="150" rx="10" fill="#F4F7FA" stroke="#C9D2DC"/>
-<text x="122" y="697.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">Governance</text>
-<text x="122" y="717.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">&amp; regulation</text>
-<rect x="230" y="160" width="380" height="150" rx="10" fill="#FFF6EE" stroke="#E8C29F" stroke-width="1.5"/>
-<text x="242" y="182" text-anchor="start" font-size="14" font-weight="700" fill="#C2611B">Signals already true</text>
-<text x="242" y="202" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• 40% of enterprise apps embed AI agents</text>
-<text x="251" y="219" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">by end of 2026 (from &lt; 5% in 2025)</text>
-<text x="242" y="236" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• 60% of AI projects without AI-ready data</text>
-<text x="251" y="253" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">abandoned (through 2026)</text>
-<rect x="622" y="160" width="380" height="150" rx="10" fill="#FFF6EE" stroke="#E8C29F" stroke-width="1.5"/>
-<text x="634" y="182" text-anchor="start" font-size="14" font-weight="700" fill="#C2611B">2027</text>
-<text x="634" y="202" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• &gt;40% of agentic AI projects cancelled</text>
-<text x="643" y="219" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">(cost, unclear value, weak risk control)</text>
-<text x="634" y="236" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Only ~130 genuine agentic vendors</text>
-<text x="634" y="253" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• EU AI Act credit scoring: 2 Dec 2027</text>
-<rect x="1014" y="160" width="380" height="150" rx="10" fill="#FFF6EE" stroke="#E8C29F" stroke-width="1.5"/>
-<text x="1026" y="182" text-anchor="start" font-size="14" font-weight="700" fill="#C2611B">2028</text>
-<text x="1026" y="202" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Event-driven &#x27;agentic data streaming&#x27;</text>
-<text x="1035" y="219" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">&gt; 60% adoption (from &lt; 15% in 2025)</text>
-<text x="1026" y="236" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• 15% of daily work decisions autonomous</text>
-<text x="1026" y="253" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• 33% of enterprise software agentic</text>
-<rect x="1406" y="160" width="380" height="150" rx="10" fill="#FFF6EE" stroke="#E8C29F" stroke-width="1.5"/>
-<text x="1418" y="182" text-anchor="start" font-size="14" font-weight="700" fill="#C2611B">2029 – 2030</text>
-<text x="1418" y="202" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Modelled decisions 5x more trusted</text>
-<text x="1418" y="219" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Semantic layer = critical infrastructure</text>
-<text x="1418" y="236" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• 50% use agents to write data contracts</text>
-<text x="1418" y="253" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• 40% of enterprises used GraphRAG</text>
-<rect x="230" y="322" width="380" height="140" rx="10" fill="#F2FAFE" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="242" y="344" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">Today</text>
-<text x="242" y="364" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Micro-batches every 10 s, 1-min lag</text>
-<text x="242" y="381" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• 6 ingestion methods, Snowflake tables</text>
-<text x="242" y="398" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• dbt: 32 models, 43 tests</text>
-<rect x="622" y="322" width="380" height="140" rx="10" fill="#EEF8F2" stroke="#9FD3B8" stroke-width="1.5"/>
-<text x="634" y="344" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">2027</text>
-<text x="634" y="364" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Kafka (MSK) + log-based CDC</text>
-<text x="643" y="381" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">for payments and core banking</text>
-<text x="634" y="398" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Data contracts on every source</text>
-<rect x="1014" y="322" width="380" height="140" rx="10" fill="#EEF8F2" stroke="#9FD3B8" stroke-width="1.5"/>
-<text x="1026" y="344" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">2028</text>
-<text x="1026" y="364" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Most flows event-driven</text>
-<text x="1026" y="381" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Flink fraud score before payment</text>
-<text x="1026" y="398" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Bronze on Apache Iceberg (S3)</text>
-<rect x="1406" y="322" width="380" height="140" rx="10" fill="#EEF8F2" stroke="#9FD3B8" stroke-width="1.5"/>
-<text x="1418" y="344" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">2029 – 2030</text>
-<text x="1418" y="364" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Open lakehouse, several engines</text>
-<text x="1418" y="381" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Platform serves agents as well</text>
-<text x="1427" y="398" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">as dashboards</text>
-<rect x="230" y="474" width="380" height="140" rx="10" fill="#F2FAFE" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="242" y="496" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">Today</text>
-<text x="242" y="516" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Rule-based fraud score</text>
-<text x="242" y="533" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• No AI in production</text>
-<rect x="622" y="474" width="380" height="140" rx="10" fill="#EEF8F2" stroke="#9FD3B8" stroke-width="1.5"/>
-<text x="634" y="496" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">2027</text>
-<text x="634" y="516" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• AI assistant for analysts,</text>
-<text x="643" y="533" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">on governed Gold data only</text>
-<text x="634" y="550" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Credit model documented</text>
-<rect x="1014" y="474" width="380" height="140" rx="10" fill="#EEF8F2" stroke="#9FD3B8" stroke-width="1.5"/>
-<text x="1026" y="496" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">2028</text>
-<text x="1026" y="516" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Supervised agents: alert triage,</text>
-<text x="1035" y="533" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">report drafting, human approves</text>
-<text x="1026" y="550" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Metrics defined once (semantic layer)</text>
-<rect x="1406" y="474" width="380" height="140" rx="10" fill="#EEF8F2" stroke="#9FD3B8" stroke-width="1.5"/>
-<text x="1418" y="496" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">2029 – 2030</text>
-<text x="1418" y="516" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Graph-based AML (GraphRAG)</text>
-<text x="1418" y="533" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Agents take small, reversible</text>
-<text x="1427" y="550" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">decisions within strict limits</text>
-<rect x="230" y="626" width="380" height="150" rx="10" fill="#F2FAFE" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="242" y="648" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">Today</text>
-<text x="242" y="668" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• 5 roles, masking, row access policy</text>
-<text x="242" y="685" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• EU region only (Paris)</text>
-<text x="242" y="702" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Lineage: file, batch, run id</text>
-<rect x="622" y="626" width="380" height="150" rx="10" fill="#EEF8F2" stroke="#9FD3B8" stroke-width="1.5"/>
-<text x="634" y="648" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">2027</text>
-<text x="634" y="668" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Terraform, dev / test / prod</text>
-<text x="634" y="685" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• EU AI Act ready for credit scoring</text>
-<text x="634" y="702" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Replica in Frankfurt (DORA)</text>
-<rect x="1014" y="626" width="380" height="150" rx="10" fill="#EEF8F2" stroke="#9FD3B8" stroke-width="1.5"/>
-<text x="1026" y="648" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">2028</text>
-<text x="1026" y="668" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Automatic personal-data tagging</text>
-<text x="1026" y="685" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Masking applied by tag</text>
-<text x="1026" y="702" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Every automated decision logged</text>
-<rect x="1406" y="626" width="380" height="150" rx="10" fill="#EEF8F2" stroke="#9FD3B8" stroke-width="1.5"/>
-<text x="1418" y="648" text-anchor="start" font-size="14" font-weight="700" fill="#0F1B2D">2029 – 2030</text>
-<text x="1418" y="668" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Decision governance in production</text>
-<text x="1418" y="685" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">• Contracts drafted by agents,</text>
-<text x="1427" y="702" text-anchor="start" font-size="12.5" font-weight="400" fill="#5F6673">approved by humans</text>
-<text x="30" y="812" text-anchor="start" font-size="13" font-weight="400" fill="#5F6673">Orange = Gartner published predictions and the EU AI Act deadline (sources in docs/forecast.md)  ·  Blue = what Databank runs today  ·  Green = our forecast for Databank</text>
-<text x="30" y="836" text-anchor="start" font-size="13" font-weight="400" fill="#5F6673">Expected scenario: streaming and assistants become mainstream; financial decisions stay supervised by humans until governance and regulation allow more</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1840" height="860" viewBox="0 0 1840 860" font-family="Poppins, Arial, sans-serif">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8fb79a"/></marker><marker id="ahh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f5c58"/></marker></defs>
+<rect width="1840" height="860" fill="#ffffff"/>
+<rect x="262" y="10" width="384" height="52" rx="26" fill="#347470"/>
+<text x="454.0" y="43" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">TODAY · 2026  ·  what we built</text>
+<rect x="656" y="10" width="384" height="52" rx="26" fill="#35b276"/>
+<text x="848.0" y="43" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">2027  ·  foundations</text>
+<rect x="1050" y="10" width="384" height="52" rx="26" fill="#35b276"/>
+<text x="1242.0" y="43" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">2028  ·  real time</text>
+<rect x="1444" y="10" width="384" height="52" rx="26" fill="#35b276"/>
+<text x="1636.0" y="43" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">2029 – 2030  ·  governed AI</text>
+<line x1="262" y1="78" x2="1824" y2="78" stroke="#b8e28a" stroke-width="4" marker-end="url(#ah)"/>
+<rect x="10" y="96" width="236" height="170" rx="16" fill="#e7ffcc" stroke="#e7ffcc" stroke-width="0"/>
+<circle cx="44.0" cy="181.0" r="23.0" fill="#ffffff"/>
+<g transform="translate(30,167.0) scale(1.1666666666666667)" fill="none" stroke="#347470" stroke-width="1.71" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22V3"/><path d="M5 4h12l-2 4 2 4H5"/></g>
+<text x="80" y="177.0" text-anchor="start" font-size="17" font-weight="700" fill="#347470">Gartner</text>
+<text x="80" y="199.0" text-anchor="start" font-size="17" font-weight="700" fill="#347470">signals</text>
+<rect x="10" y="280" width="236" height="160" rx="16" fill="#e7ffcc" stroke="#e7ffcc" stroke-width="0"/>
+<circle cx="44.0" cy="360.0" r="23.0" fill="#ffffff"/>
+<g transform="translate(30,346.0) scale(1.1666666666666667)" fill="none" stroke="#347470" stroke-width="1.71" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h8l-1 8 9-12h-8z"/></g>
+<text x="80" y="356.0" text-anchor="start" font-size="17" font-weight="700" fill="#347470">Data &amp;</text>
+<text x="80" y="378.0" text-anchor="start" font-size="17" font-weight="700" fill="#347470">streaming</text>
+<rect x="10" y="454" width="236" height="160" rx="16" fill="#e7ffcc" stroke="#e7ffcc" stroke-width="0"/>
+<circle cx="44.0" cy="534.0" r="23.0" fill="#ffffff"/>
+<g transform="translate(30,520.0) scale(1.1666666666666667)" fill="none" stroke="#347470" stroke-width="1.71" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></g>
+<text x="80" y="530.0" text-anchor="start" font-size="17" font-weight="700" fill="#347470">AI &amp;</text>
+<text x="80" y="552.0" text-anchor="start" font-size="17" font-weight="700" fill="#347470">agents</text>
+<rect x="10" y="628" width="236" height="170" rx="16" fill="#e7ffcc" stroke="#e7ffcc" stroke-width="0"/>
+<circle cx="44.0" cy="713.0" r="23.0" fill="#ffffff"/>
+<g transform="translate(30,699.0) scale(1.1666666666666667)" fill="none" stroke="#347470" stroke-width="1.71" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></g>
+<text x="80" y="709.0" text-anchor="start" font-size="17" font-weight="700" fill="#347470">Governance</text>
+<text x="80" y="731.0" text-anchor="start" font-size="17" font-weight="700" fill="#347470">&amp; rules</text>
+<rect x="262" y="96" width="384" height="170" rx="14" fill="#f1f5f4" stroke="#c5d6d2" stroke-width="2"/>
+<text x="278" y="126" text-anchor="start" font-size="16" font-weight="700" fill="#1f5c58">Already true</text>
+<circle cx="283" cy="149.5" r="3.5" fill="#35b276"/>
+<text x="292" y="154" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">40% of business apps embed AI agents</text>
+<text x="292" y="178" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">by end of 2026 (from &lt; 5% in 2025)</text>
+<circle cx="283" cy="197.5" r="3.5" fill="#35b276"/>
+<text x="292" y="202" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">60% of AI projects without AI-ready</text>
+<text x="292" y="226" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">data abandoned</text>
+<rect x="262" y="280" width="384" height="160" rx="14" fill="#ffffff" stroke="#347470" stroke-width="2"/>
+<text x="278" y="310" text-anchor="start" font-size="16" font-weight="700" fill="#347470">Today</text>
+<circle cx="283" cy="333.5" r="3.5" fill="#35b276"/>
+<text x="292" y="338" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Micro-batches every 10 s</text>
+<circle cx="283" cy="357.5" r="3.5" fill="#35b276"/>
+<text x="292" y="362" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">6 ingestion methods</text>
+<circle cx="283" cy="381.5" r="3.5" fill="#35b276"/>
+<text x="292" y="386" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">dbt: 32 models, 43 tests</text>
+<rect x="262" y="454" width="384" height="160" rx="14" fill="#ffffff" stroke="#347470" stroke-width="2"/>
+<text x="278" y="484" text-anchor="start" font-size="16" font-weight="700" fill="#347470">Today</text>
+<circle cx="283" cy="507.5" r="3.5" fill="#35b276"/>
+<text x="292" y="512" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Rule-based fraud score</text>
+<circle cx="283" cy="531.5" r="3.5" fill="#35b276"/>
+<text x="292" y="536" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">No AI in production</text>
+<rect x="262" y="628" width="384" height="170" rx="14" fill="#ffffff" stroke="#347470" stroke-width="2"/>
+<text x="278" y="658" text-anchor="start" font-size="16" font-weight="700" fill="#347470">Today</text>
+<circle cx="283" cy="681.5" r="3.5" fill="#35b276"/>
+<text x="292" y="686" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">5 roles, masking, row access</text>
+<circle cx="283" cy="705.5" r="3.5" fill="#35b276"/>
+<text x="292" y="710" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">EU region only (Paris)</text>
+<circle cx="283" cy="729.5" r="3.5" fill="#35b276"/>
+<text x="292" y="734" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Lineage: file, batch, run id</text>
+<rect x="656" y="96" width="384" height="170" rx="14" fill="#f1f5f4" stroke="#c5d6d2" stroke-width="2"/>
+<text x="672" y="126" text-anchor="start" font-size="16" font-weight="700" fill="#1f5c58">2027</text>
+<circle cx="677" cy="149.5" r="3.5" fill="#35b276"/>
+<text x="686" y="154" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">&gt; 40% of agentic AI projects cancelled</text>
+<text x="686" y="178" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">(cost, unclear value, weak control)</text>
+<circle cx="677" cy="197.5" r="3.5" fill="#35b276"/>
+<text x="686" y="202" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">EU AI Act for credit scoring:</text>
+<text x="686" y="226" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">2 December 2027</text>
+<rect x="656" y="280" width="384" height="160" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="672" y="310" text-anchor="start" font-size="16" font-weight="700" fill="#2f3a3a">2027</text>
+<circle cx="677" cy="333.5" r="3.5" fill="#35b276"/>
+<text x="686" y="338" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Kafka + log-based CDC</text>
+<circle cx="677" cy="357.5" r="3.5" fill="#35b276"/>
+<text x="686" y="362" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Data contracts on every source</text>
+<circle cx="677" cy="381.5" r="3.5" fill="#35b276"/>
+<text x="686" y="386" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Terraform for every object</text>
+<rect x="656" y="454" width="384" height="160" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="672" y="484" text-anchor="start" font-size="16" font-weight="700" fill="#2f3a3a">2027</text>
+<circle cx="677" cy="507.5" r="3.5" fill="#35b276"/>
+<text x="686" y="512" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">AI assistant for analysts,</text>
+<text x="686" y="536" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">on governed Gold data only</text>
+<circle cx="677" cy="555.5" r="3.5" fill="#35b276"/>
+<text x="686" y="560" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Credit model documented</text>
+<rect x="656" y="628" width="384" height="170" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="672" y="658" text-anchor="start" font-size="16" font-weight="700" fill="#2f3a3a">2027</text>
+<circle cx="677" cy="681.5" r="3.5" fill="#35b276"/>
+<text x="686" y="686" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Dev / test / prod environments</text>
+<circle cx="677" cy="705.5" r="3.5" fill="#35b276"/>
+<text x="686" y="710" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">EU AI Act ready (credit scoring)</text>
+<circle cx="677" cy="729.5" r="3.5" fill="#35b276"/>
+<text x="686" y="734" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Replica in Frankfurt (DORA)</text>
+<rect x="1050" y="96" width="384" height="170" rx="14" fill="#f1f5f4" stroke="#c5d6d2" stroke-width="2"/>
+<text x="1066" y="126" text-anchor="start" font-size="16" font-weight="700" fill="#1f5c58">2028</text>
+<circle cx="1071" cy="149.5" r="3.5" fill="#35b276"/>
+<text x="1080" y="154" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Event-driven data streaming &gt; 60%</text>
+<text x="1080" y="178" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">of companies (from &lt; 15% in 2025)</text>
+<circle cx="1071" cy="197.5" r="3.5" fill="#35b276"/>
+<text x="1080" y="202" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">15% of daily work decisions</text>
+<text x="1080" y="226" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">made by agents</text>
+<rect x="1050" y="280" width="384" height="160" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="1066" y="310" text-anchor="start" font-size="16" font-weight="700" fill="#2f3a3a">2028</text>
+<circle cx="1071" cy="333.5" r="3.5" fill="#35b276"/>
+<text x="1080" y="338" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Most flows event-driven</text>
+<circle cx="1071" cy="357.5" r="3.5" fill="#35b276"/>
+<text x="1080" y="362" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Fraud score before payment</text>
+<circle cx="1071" cy="381.5" r="3.5" fill="#35b276"/>
+<text x="1080" y="386" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Bronze on Apache Iceberg</text>
+<rect x="1050" y="454" width="384" height="160" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="1066" y="484" text-anchor="start" font-size="16" font-weight="700" fill="#2f3a3a">2028</text>
+<circle cx="1071" cy="507.5" r="3.5" fill="#35b276"/>
+<text x="1080" y="512" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Supervised agents: alert triage,</text>
+<text x="1080" y="536" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">report drafts; a human approves</text>
+<circle cx="1071" cy="555.5" r="3.5" fill="#35b276"/>
+<text x="1080" y="560" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Metrics defined once</text>
+<rect x="1050" y="628" width="384" height="170" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="1066" y="658" text-anchor="start" font-size="16" font-weight="700" fill="#2f3a3a">2028</text>
+<circle cx="1071" cy="681.5" r="3.5" fill="#35b276"/>
+<text x="1080" y="686" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Personal data tagged automatically</text>
+<circle cx="1071" cy="705.5" r="3.5" fill="#35b276"/>
+<text x="1080" y="710" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Masking applied by tag</text>
+<circle cx="1071" cy="729.5" r="3.5" fill="#35b276"/>
+<text x="1080" y="734" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Every automated decision logged</text>
+<rect x="1444" y="96" width="384" height="170" rx="14" fill="#f1f5f4" stroke="#c5d6d2" stroke-width="2"/>
+<text x="1460" y="126" text-anchor="start" font-size="16" font-weight="700" fill="#1f5c58">2029 – 2030</text>
+<circle cx="1465" cy="149.5" r="3.5" fill="#35b276"/>
+<text x="1474" y="154" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Semantic layer = critical infrastructure</text>
+<circle cx="1465" cy="173.5" r="3.5" fill="#35b276"/>
+<text x="1474" y="178" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">50% use agents to write data contracts</text>
+<circle cx="1465" cy="197.5" r="3.5" fill="#35b276"/>
+<text x="1474" y="202" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">40% of companies use GraphRAG</text>
+<rect x="1444" y="280" width="384" height="160" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="1460" y="310" text-anchor="start" font-size="16" font-weight="700" fill="#2f3a3a">2029 – 2030</text>
+<circle cx="1465" cy="333.5" r="3.5" fill="#35b276"/>
+<text x="1474" y="338" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Open lakehouse, several engines</text>
+<circle cx="1465" cy="357.5" r="3.5" fill="#35b276"/>
+<text x="1474" y="362" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Platform serves agents</text>
+<text x="1474" y="386" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">as well as dashboards</text>
+<rect x="1444" y="454" width="384" height="160" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="1460" y="484" text-anchor="start" font-size="16" font-weight="700" fill="#2f3a3a">2029 – 2030</text>
+<circle cx="1465" cy="507.5" r="3.5" fill="#35b276"/>
+<text x="1474" y="512" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Graph-based anti-money laundering</text>
+<circle cx="1465" cy="531.5" r="3.5" fill="#35b276"/>
+<text x="1474" y="536" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Agents take small, reversible</text>
+<text x="1474" y="560" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">decisions within strict limits</text>
+<rect x="1444" y="628" width="384" height="170" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="1460" y="658" text-anchor="start" font-size="16" font-weight="700" fill="#2f3a3a">2029 – 2030</text>
+<circle cx="1465" cy="681.5" r="3.5" fill="#35b276"/>
+<text x="1474" y="686" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Decision governance in production</text>
+<circle cx="1465" cy="705.5" r="3.5" fill="#35b276"/>
+<text x="1474" y="710" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">Contracts drafted by agents,</text>
+<text x="1474" y="734" text-anchor="start" font-size="14.5" font-weight="400" fill="#5a6470">approved by humans</text>
+<text x="10" y="836" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">Grey = Gartner published predictions and the EU AI Act deadline (sources in docs/forecast.md)  ·  Dark outline = what Databank runs today  ·  Green outline = our forecast</text>
 </svg>

@@ -13,8 +13,8 @@ is around them:
 
 ![Target architecture](img/target_architecture.png)
 
-*Green boxes are new or upgraded compared with [today's pipeline](architecture.md); the red band is the
-new real-time path.*
+*Green outlines are new or upgraded compared with [today's pipeline](architecture.md); the dark-teal band at the top is the
+new real-time path (H1–H4). Numbers match the steps below.*
 
 ## 1. What stays the same, and why
 
@@ -50,15 +50,27 @@ being rebuilt.
 | **Governance** | 5 roles, 4 masking policies, 1 row access policy | Horizon catalog with automatic detection of personal data, masking applied by tag, private network links (PrivateLink), bank-managed encryption keys |
 | **Machine learning / AI** | none | feature store, model registry (fraud, credit risk, churn), AI assistant for analysts, document AI for KYC files |
 | **Consumers** | Streamlit dashboard, SQL | + BI tool with certified metrics (Sigma / Power BI), reverse ETL to the CRM, automated regulatory reporting, push notifications |
-| **Infrastructure as Code** | re-runnable SQL scripts | Terraform for AWS and Snowflake, with plan, state and drift detection |
-| **Containers** | none needed (disposable GitHub runners) | Docker image per connector or job, stored in Amazon ECR |
+| **Infrastructure as Code** | re-runnable SQL scripts + Terraform for the newest objects (BI warehouse, reviewer role, evidence schema) | Terraform for AWS and Snowflake, with plan, state and drift detection |
+| **Containers** | one Docker job (ECB loader), built and run in GitHub Actions | Docker image per connector or job, stored in Amazon ECR |
 | **Disaster recovery** | none (trial account) | replication Paris → Frankfurt with tested failover (DORA requirement) |
 | **Environments** | one account | separate dev, test and prod accounts |
-| **Cost** | ≈ $34 so far | tens of thousands of euros per month (see § 5) |
+| **Cost** | €0: about 11.5 of the 400 free trial credits | tens of thousands of euros per month (see § 6) |
 
-## 3. The target, step by step
+## 3. One payment, today and in the best case
 
-### Hot path (red, H1 to H4): real time, in milliseconds
+Camille pays €12.40 for lunch at a bakery in Lyon (the example used in the oral defense):
+
+| Step | Today | Best case |
+|---|---|---|
+| The payment reaches the bank | in a micro-batch, within 10 seconds | as a Kafka event, immediately (H1) |
+| Fraud check | a rule, after the payment is accepted | a score in under 100 ms, **before** it is accepted (H2) |
+| Camille sees it | pending payment and new balance in under 2 minutes | balance in an operational database and a push notification in under 1 second (H3, H4) |
+| Reports | dbt rebuilds Gold every 15 minutes | the same dbt models, on Iceberg Bronze, orchestrated by Airflow (8, 9) |
+| Her card is used in Marseille 10 minutes later | flagged after the fact in the reports | blocked in real time by the fraud score |
+
+## 4. The target, step by step
+
+### Hot path (dark teal, H1 to H4): real time, in milliseconds
 
 | Step | What happens | Why |
 |---|---|---|
@@ -104,7 +116,7 @@ being rebuilt.
 | 12 | DevOps | Terraform for AWS + Snowflake, Docker images in ECR, CI/CD, secrets in AWS Secrets Manager |
 | 13 | Resilience (DORA) | replication to Frankfurt, tested failover; data loss limited to minutes, recovery in under an hour |
 
-## 4. Freshness per use case: today vs target
+## 5. Freshness per use case: today vs target
 
 | Use case | Today | Target |
 |---|---|---|
@@ -114,7 +126,7 @@ being rebuilt.
 | 3 · Personal dashboards | 15 minutes | a few seconds (dynamic tables on streamed data) |
 | 4 · Regulatory reports | daily, prepared tables | daily, generated and submitted automatically, fully traced |
 
-## 5. What it would cost (order of magnitude)
+## 6. What it would cost (order of magnitude)
 
 > Illustrative only: this is what a real bank would pay for the target design. Our project itself uses
 > only free tiers and free trial credits and costs €0.
@@ -135,7 +147,7 @@ The biggest lever is the same as today: **compute**. Streaming everything all da
 expensive, which is why even with an unlimited budget we would keep batch for everything that does not
 need to be live.
 
-## 6. How we would get there from today
+## 7. How we would get there from today
 
 Because the foundations are the same, the migration can be done in steps, each one useful on its own:
 
@@ -147,7 +159,7 @@ Because the foundations are the same, the migration can be done in steps, each o
 | 4 | Iceberg Bronze on S3; managed connectors for D, E, F, G | open formats and less code to maintain |
 | 5 | Feature store, ML models, AI assistant; replication to Frankfurt | value on top of trusted, fresh data |
 
-## 7. What we would still **not** do
+## 8. What we would still **not** do
 
 | Not done | Why |
 |---|---|

@@ -1,168 +1,198 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="930" viewBox="0 0 1600 930" font-family="Arial, Helvetica, sans-serif">
-<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9AA5B1"/></marker></defs>
-<rect width="1600" height="930" fill="#FFFFFF"/>
-<text x="30" y="44" text-anchor="start" font-size="26" font-weight="700" fill="#0F1B2D">Databank · data platform architecture</text>
-<text x="30" y="70" text-anchor="start" font-size="15" font-weight="400" fill="#5F6673">Single cloud: AWS (eu-west-3 Paris) · Snowflake · dbt · GitHub Actions</text>
-<rect x="600" y="82" width="640" height="790" rx="16" fill="#F2FAFE" stroke="#29B5E8" stroke-width="2" stroke-dasharray="8 6"/>
-<text x="920" y="872" text-anchor="start" font-size="12" font-weight="400" fill="#5F6673"></text>
-<text x="1240" y="74" text-anchor="end" font-size="14" font-weight="700" fill="#1E6FA8">❄ Snowflake · AWS Paris</text>
-<rect x="306" y="82" width="270" height="790" rx="16" fill="#FAFAFA" stroke="#C9D2DC" stroke-width="1.5" stroke-dasharray="4 5"/>
-<text x="576" y="74" text-anchor="end" font-size="13" font-weight="700" fill="#5F6673">GitHub Actions runners</text>
-<text x="30" y="100" text-anchor="start" font-size="13" font-weight="700" fill="#5F6673">SOURCES</text>
-<text x="620" y="100" text-anchor="start" font-size="13" font-weight="700" fill="#5F6673">BRONZE</text>
-<text x="820" y="100" text-anchor="start" font-size="13" font-weight="700" fill="#5F6673">SILVER</text>
-<text x="1030" y="100" text-anchor="start" font-size="13" font-weight="700" fill="#5F6673">GOLD</text>
-<text x="1290" y="100" text-anchor="start" font-size="13" font-weight="700" fill="#5F6673">CONSUMERS</text>
-<rect x="30" y="112" width="250" height="92" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="155.0" y="156.25" text-anchor="middle" font-size="15" font-weight="700" fill="#0F1B2D">Card terminals (TPE)</text>
-<text x="155.0" y="175.25" text-anchor="middle" font-size="12.5" fill="#5F6673">authorizations · JSON · simulated</text>
-<rect x="38" y="120" width="26" height="26" rx="6" fill="#0F1B2D"/><text x="51" y="138" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">A</text>
-<rect x="322" y="122" width="238" height="72" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="441.0" y="156.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0F1B2D">Micro-batch streaming</text>
-<text x="441.0" y="174.0" text-anchor="middle" font-size="12" fill="#5F6673">producer.py · every 10 s</text>
-<circle cx="322" cy="122" r="13" fill="#C2611B"/><text x="322" y="127" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">1</text>
-<line x1="280" y1="158.0" x2="320" y2="158.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="560" y1="158.0" x2="618" y2="158.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="618" y="124" width="178" height="68" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="707.0" y="162.75" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F1B2D">RAW.TPE_AUTHORIZATIONS</text>
-<rect x="30" y="218" width="250" height="92" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="155.0" y="262.25" text-anchor="middle" font-size="15" font-weight="700" fill="#0F1B2D">Core banking (OLTP)</text>
-<text x="155.0" y="281.25" text-anchor="middle" font-size="12.5" fill="#5F6673">clients, accounts, positions</text>
-<rect x="38" y="226" width="26" height="26" rx="6" fill="#0F1B2D"/><text x="51" y="244" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">B</text>
-<rect x="322" y="228" width="238" height="72" rx="10" fill="#EEF6FB" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="441.0" y="262.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0F1B2D">CDC: streams + task</text>
-<text x="441.0" y="280.0" text-anchor="middle" font-size="12" fill="#5F6673">inside Snowflake · every 15 min</text>
-<circle cx="322" cy="228" r="13" fill="#C2611B"/><text x="322" y="233" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">2</text>
-<line x1="280" y1="264.0" x2="320" y2="264.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="560" y1="264.0" x2="618" y2="264.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="618" y="230" width="178" height="68" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="707.0" y="253.75" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F1B2D">CORE_BANKING.*</text>
-<text x="707.0" y="270.25" text-anchor="middle" font-size="12" fill="#5F6673">→ RAW.CORE_BANKING_</text>
-<text x="707.0" y="285.25" text-anchor="middle" font-size="12" fill="#5F6673">CHANGES</text>
-<rect x="30" y="324" width="250" height="92" rx="10" fill="#FFF6EE" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="155.0" y="368.25" text-anchor="middle" font-size="15" font-weight="700" fill="#0F1B2D">Market data · REAL</text>
-<text x="155.0" y="387.25" text-anchor="middle" font-size="12.5" fill="#5F6673">Nasdaq prices, FX (Marketplace)</text>
-<rect x="38" y="332" width="26" height="26" rx="6" fill="#0F1B2D"/><text x="51" y="350" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">C</text>
-<rect x="322" y="334" width="238" height="72" rx="10" fill="#EEF6FB" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="441.0" y="368.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0F1B2D">Secure data share</text>
-<text x="441.0" y="386.0" text-anchor="middle" font-size="12" fill="#5F6673">zero-copy · no pipeline</text>
-<circle cx="322" cy="334" r="13" fill="#C2611B"/><text x="322" y="339" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">3</text>
-<line x1="280" y1="370.0" x2="320" y2="370.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="560" y1="370.0" x2="618" y2="370.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="618" y="336" width="178" height="68" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="707.0" y="367.25" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F1B2D">SNOWFLAKE_CURATED_</text>
-<text x="707.0" y="383.75" text-anchor="middle" font-size="12" fill="#5F6673">DATA_FREE (shared DB)</text>
-<rect x="30" y="430" width="250" height="92" rx="10" fill="#FFF6EE" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="155.0" y="474.25" text-anchor="middle" font-size="15" font-weight="700" fill="#0F1B2D">ECB Data Portal API · REAL</text>
-<text x="155.0" y="493.25" text-anchor="middle" font-size="12.5" fill="#5F6673">euro reference rates</text>
-<rect x="38" y="438" width="26" height="26" rx="6" fill="#0F1B2D"/><text x="51" y="456" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">D</text>
-<rect x="322" y="440" width="238" height="72" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="441.0" y="474.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0F1B2D">REST API pull, incremental</text>
-<text x="441.0" y="492.0" text-anchor="middle" font-size="12" fill="#5F6673">watermark + MERGE · daily cron</text>
-<circle cx="322" cy="440" r="13" fill="#C2611B"/><text x="322" y="445" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">4</text>
-<line x1="280" y1="476.0" x2="320" y2="476.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="560" y1="476.0" x2="618" y2="476.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="618" y="442" width="178" height="68" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="707.0" y="480.75" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F1B2D">RAW.ECB_FX_RATES</text>
-<rect x="30" y="536" width="250" height="92" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="155.0" y="580.25" text-anchor="middle" font-size="15" font-weight="700" fill="#0F1B2D">Banque de France</text>
-<text x="155.0" y="599.25" text-anchor="middle" font-size="12.5" fill="#5F6673">registry extracts · CSV files</text>
-<rect x="38" y="544" width="26" height="26" rx="6" fill="#0F1B2D"/><text x="51" y="562" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">E</text>
-<rect x="322" y="546" width="238" height="72" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="441.0" y="580.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0F1B2D">PUT + Snowpipe</text>
-<text x="441.0" y="598.0" text-anchor="middle" font-size="12" fill="#5F6673">REST-triggered · daily</text>
-<circle cx="322" cy="546" r="13" fill="#C2611B"/><text x="322" y="551" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">5</text>
-<line x1="280" y1="582.0" x2="320" y2="582.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="560" y1="582.0" x2="618" y2="582.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="618" y="548" width="178" height="68" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="707.0" y="579.25" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F1B2D">STG_BDF → PIPE</text>
-<text x="707.0" y="595.75" text-anchor="middle" font-size="12" fill="#5F6673">RAW.BDF_REGISTRY</text>
-<rect x="30" y="642" width="250" height="92" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="155.0" y="686.25" text-anchor="middle" font-size="15" font-weight="700" fill="#0F1B2D">Mobile app</text>
-<text x="155.0" y="705.25" text-anchor="middle" font-size="12.5" fill="#5F6673">events · JSON lines</text>
-<rect x="38" y="650" width="26" height="26" rx="6" fill="#0F1B2D"/><text x="51" y="668" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">F</text>
-<rect x="322" y="652" width="238" height="72" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="441.0" y="686.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0F1B2D">PUT + COPY INTO</text>
-<text x="441.0" y="704.0" text-anchor="middle" font-size="12" fill="#5F6673">batch 3x/day · S3 auto-ingest opt.</text>
-<circle cx="322" cy="652" r="13" fill="#C2611B"/><text x="322" y="657" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">6</text>
-<line x1="280" y1="688.0" x2="320" y2="688.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="560" y1="688.0" x2="618" y2="688.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="618" y="654" width="178" height="68" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="707.0" y="685.25" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F1B2D">STG_APP_EVENTS</text>
-<text x="707.0" y="701.75" text-anchor="middle" font-size="12" fill="#5F6673">RAW.APP_EVENTS</text>
-<rect x="822" y="124" width="188" height="300" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="916.0" y="256.75" text-anchor="middle" font-size="15" font-weight="700" fill="#0F1B2D">STAGING</text>
-<text x="916.0" y="275.75" text-anchor="middle" font-size="12.5" fill="#5F6673">11 views</text>
-<text x="916.0" y="291.25" text-anchor="middle" font-size="12.5" fill="#5F6673">1 per source table</text>
-<text x="916.0" y="306.75" text-anchor="middle" font-size="12.5" fill="#5F6673">typed, renamed, flagged</text>
-<rect x="822" y="454" width="188" height="268" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="916.0" y="570.75" text-anchor="middle" font-size="15" font-weight="700" fill="#0F1B2D">INTERMEDIATE</text>
-<text x="916.0" y="589.75" text-anchor="middle" font-size="12.5" fill="#5F6673">dedup · SCD2 client history</text>
-<text x="916.0" y="605.25" text-anchor="middle" font-size="12.5" fill="#5F6673">FX: ECB API vs Marketplace</text>
-<text x="916.0" y="620.75" text-anchor="middle" font-size="12.5" fill="#5F6673">latest credit status</text>
-<line x1="796" y1="158.0" x2="820" y2="158.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="796" y1="264.0" x2="820" y2="264.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="796" y1="370.0" x2="820" y2="370.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="796" y1="476.0" x2="820" y2="476.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="796" y1="582.0" x2="820" y2="582.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="796" y1="688.0" x2="820" y2="688.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="1036" y="124" width="190" height="110" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="1131.0" y="169.5" text-anchor="middle" font-size="13" font-weight="700" fill="#0F1B2D">FINANCE</text>
-<text x="1131.0" y="186.5" text-anchor="middle" font-size="11.5" fill="#5F6673">fct_card_transactions*</text>
-<text x="1131.0" y="201.0" text-anchor="middle" font-size="11.5" fill="#5F6673">dim_clients 🔒 · daily spend</text>
-<line x1="1010" y1="179.0" x2="1034" y2="179.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="1036" y="244" width="190" height="110" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="1131.0" y="289.5" text-anchor="middle" font-size="13" font-weight="700" fill="#0F1B2D">SERVING (LIVE)</text>
-<text x="1131.0" y="306.5" text-anchor="middle" font-size="11.5" fill="#5F6673">account_live_balance*</text>
-<text x="1131.0" y="321.0" text-anchor="middle" font-size="11.5" fill="#5F6673">portfolio · app_* views 🔒</text>
-<line x1="1010" y1="299.0" x2="1034" y2="299.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="1036" y="364" width="190" height="110" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="1131.0" y="409.5" text-anchor="middle" font-size="13" font-weight="700" fill="#0F1B2D">REGULATORY</text>
-<text x="1131.0" y="426.5" text-anchor="middle" font-size="11.5" fill="#5F6673">BdF daily report</text>
-<text x="1131.0" y="441.0" text-anchor="middle" font-size="11.5" fill="#5F6673">AML alerts · credit watchlist</text>
-<line x1="1010" y1="419.0" x2="1034" y2="419.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="1036" y="484" width="190" height="110" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="1131.0" y="529.5" text-anchor="middle" font-size="13" font-weight="700" fill="#0F1B2D">MARKET</text>
-<text x="1131.0" y="546.5" text-anchor="middle" font-size="11.5" fill="#5F6673">FX rates daily</text>
-<text x="1131.0" y="561.0" text-anchor="middle" font-size="11.5" fill="#5F6673">stock prices in €</text>
-<line x1="1010" y1="539.0" x2="1034" y2="539.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="1036" y="604" width="190" height="110" rx="10" fill="#FFFFFF" stroke="#A9D8EE" stroke-width="1.5"/>
-<text x="1131.0" y="649.5" text-anchor="middle" font-size="13" font-weight="700" fill="#0F1B2D">DIGITAL + DQ</text>
-<text x="1131.0" y="666.5" text-anchor="middle" font-size="11.5" fill="#5F6673">app engagement</text>
-<text x="1131.0" y="681.0" text-anchor="middle" font-size="11.5" fill="#5F6673">rejected messages</text>
-<line x1="1010" y1="659.0" x2="1034" y2="659.0" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="622" y="742" width="194" height="108" rx="10" fill="#FFFFFF" stroke="#29B5E8" stroke-width="1.5"/>
-<text x="719.0" y="794.25" text-anchor="middle" font-size="14" font-weight="700" fill="#0F1B2D">dbt build + tests</text>
-<text x="719.0" y="812.25" text-anchor="middle" font-size="11.5" fill="#5F6673">task DAG · every 15 min</text>
-<circle cx="622" cy="742" r="13" fill="#1E6FA8"/><text x="622" y="747" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">7</text>
-<rect x="828" y="742" width="194" height="108" rx="10" fill="#FFFFFF" stroke="#29B5E8" stroke-width="1.5"/>
-<text x="925.0" y="794.25" text-anchor="middle" font-size="14" font-weight="700" fill="#0F1B2D">Dynamic tables *</text>
-<text x="925.0" y="812.25" text-anchor="middle" font-size="11.5" fill="#5F6673">live path · 1-min lag</text>
-<circle cx="828" cy="742" r="13" fill="#1E6FA8"/><text x="828" y="747" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">8</text>
-<rect x="1034" y="742" width="194" height="108" rx="10" fill="#FFFFFF" stroke="#29B5E8" stroke-width="1.5"/>
-<text x="1131.0" y="787.0" text-anchor="middle" font-size="14" font-weight="700" fill="#0F1B2D">Governance</text>
-<text x="1131.0" y="805.0" text-anchor="middle" font-size="11.5" fill="#5F6673">RBAC · masking</text>
-<text x="1131.0" y="819.5" text-anchor="middle" font-size="11.5" fill="#5F6673">row access · time travel</text>
-<circle cx="1034" cy="742" r="13" fill="#1E6FA8"/><text x="1034" y="747" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">9</text>
-<rect x="1290" y="150" width="280" height="110" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="1430.0" y="196.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">Mobile app</text>
-<text x="1430.0" y="216.0" text-anchor="middle" font-size="12.5" fill="#5F6673">live balance &amp; payments &lt; 2 min</text>
-<text x="1430.0" y="231.5" text-anchor="middle" font-size="12.5" fill="#5F6673">row access: own data only</text>
-<line x1="1226" y1="205" x2="1288" y2="205" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="1290" y="325" width="280" height="110" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="1430.0" y="371.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">Dashboards</text>
-<text x="1430.0" y="391.0" text-anchor="middle" font-size="12.5" fill="#5F6673">Streamlit in Snowflake</text>
-<text x="1430.0" y="406.5" text-anchor="middle" font-size="12.5" fill="#5F6673">clients · advisors · ops</text>
-<line x1="1226" y1="380" x2="1288" y2="380" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="1290" y="500" width="280" height="110" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="1430.0" y="546.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">Regulators</text>
-<text x="1430.0" y="566.0" text-anchor="middle" font-size="12.5" fill="#5F6673">Banque de France report</text>
-<text x="1430.0" y="581.5" text-anchor="middle" font-size="12.5" fill="#5F6673">AML alerts → Tracfin</text>
-<line x1="1226" y1="555" x2="1288" y2="555" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="1290" y="675" width="280" height="110" rx="10" fill="#FFFFFF" stroke="#C9D2DC" stroke-width="1.5"/>
-<text x="1430.0" y="721.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0F1B2D">Analysts &amp; data science</text>
-<text x="1430.0" y="741.0" text-anchor="middle" font-size="12.5" fill="#5F6673">SQL on Gold · masked PII</text>
-<text x="1430.0" y="756.5" text-anchor="middle" font-size="12.5" fill="#5F6673">FX / market analysis</text>
-<line x1="1226" y1="730" x2="1288" y2="730" stroke="#9AA5B1" stroke-width="2" marker-end="url(#ah)"/>
-<text x="30" y="905" text-anchor="start" font-size="13" font-weight="400" fill="#5F6673">Real data: C, D  ·  Simulated: A, B, E, F  ·  * dynamic table  ·  🔒 masking / row access policy  ·  Warehouses: DATABANK_INGEST_WH (ingestion) / DATABANK_WH (transform) = workload isolation</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1840" height="840" viewBox="0 0 1840 840" font-family="Poppins, Arial, sans-serif">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8fb79a"/></marker><marker id="ahh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f5c58"/></marker></defs>
+<rect width="1840" height="840" fill="#ffffff"/>
+<text x="20" y="40" text-anchor="start" font-size="14" font-weight="700" fill="#347470">SOURCES</text>
+<rect x="345" y="20" width="290" height="678" rx="18" fill="#f4faef" stroke="#b8e28a" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="362" y="46" text-anchor="start" font-size="14" font-weight="700" fill="#347470">GITHUB ACTIONS</text>
+<rect x="670" y="20" width="790" height="810" rx="22" fill="#f7fcf3" stroke="#35b276" stroke-width="2.5" stroke-dasharray="10 7"/>
+<rect x="935" y="6" width="270" height="30" rx="15" fill="#35b276"/>
+<g transform="translate(950,10) scale(0.9166666666666666)" fill="none" stroke="#ffffff" stroke-width="2.18" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19h10a4.5 4.5 0 0 0 .5-9 6 6 0 0 0-11.6 1.6A3.7 3.7 0 0 0 7 19z"/></g>
+<text x="982" y="27" text-anchor="start" font-size="14" font-weight="700" fill="#ffffff">SNOWFLAKE · AWS PARIS</text>
+<text x="690" y="46" text-anchor="start" font-size="14" font-weight="700" fill="#5a6470">BRONZE</text>
+<text x="945" y="46" text-anchor="start" font-size="14" font-weight="700" fill="#5a6470">SILVER</text>
+<text x="1195" y="46" text-anchor="start" font-size="14" font-weight="700" fill="#5a6470">GOLD</text>
+<text x="1500" y="40" text-anchor="start" font-size="14" font-weight="700" fill="#347470">CONSUMERS</text>
+<rect x="20" y="62" width="300" height="92" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<circle cx="49.0" cy="108.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(36,95.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></g>
+<text x="84" y="103.75" text-anchor="start" font-size="16" font-weight="600" fill="#2f3a3a">Card terminals</text>
+<text x="84" y="124.75" text-anchor="start" font-size="12.5" font-weight="400" fill="#5a6470">JSON · simulated</text>
+<rect x="362" y="70" width="258" height="76" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="491.0" y="103.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">Micro-batch stream</text>
+<text x="491.0" y="122.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">every 10 s</text>
+<circle cx="362" cy="70" r="13" fill="#35b276" stroke="#ffffff" stroke-width="2"/>
+<text x="362" y="74.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">1</text>
+<line x1="320" y1="108.0" x2="360" y2="108.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="620" y1="108.0" x2="688" y2="108.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="690" y="74" width="230" height="68" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="805.0" y="110.75" text-anchor="middle" font-size="13.5" font-weight="600" fill="#2f3a3a">RAW card payments</text>
+<line x1="920" y1="108.0" x2="943" y2="108.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="20" y="170" width="300" height="92" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<circle cx="49.0" cy="216.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(36,203.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l10 5H2z"/><path d="M5 10v8M9.7 10v8M14.3 10v8M19 10v8M2 21h20"/></g>
+<text x="84" y="211.75" text-anchor="start" font-size="16" font-weight="600" fill="#2f3a3a">Core banking</text>
+<text x="84" y="232.75" text-anchor="start" font-size="12.5" font-weight="400" fill="#5a6470">clients, accounts</text>
+<rect x="362" y="178" width="258" height="76" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="491.0" y="211.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">CDC: streams + task</text>
+<text x="491.0" y="230.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">every 15 min</text>
+<circle cx="362" cy="178" r="13" fill="#35b276" stroke="#ffffff" stroke-width="2"/>
+<text x="362" y="182.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">2</text>
+<line x1="320" y1="216.0" x2="360" y2="216.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="620" y1="216.0" x2="688" y2="216.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="690" y="182" width="230" height="68" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="805.0" y="218.75" text-anchor="middle" font-size="13.5" font-weight="600" fill="#2f3a3a">CORE_BANKING + changes</text>
+<line x1="920" y1="216.0" x2="943" y2="216.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="20" y="278" width="300" height="92" rx="14" fill="#e7ffcc" stroke="#35b276" stroke-width="2"/>
+<circle cx="49.0" cy="324.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(36,311.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></g>
+<text x="84" y="319.75" text-anchor="start" font-size="16" font-weight="600" fill="#2f3a3a">Market data</text>
+<text x="84" y="340.75" text-anchor="start" font-size="12.5" font-weight="400" fill="#5a6470">Marketplace prices, FX</text>
+<rect x="266.0" y="286" width="46.0" height="20" rx="10" fill="#35b276"/>
+<text x="289.0" y="300" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">REAL</text>
+<rect x="362" y="286" width="258" height="76" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="491.0" y="319.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">Secure data share</text>
+<text x="491.0" y="338.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">zero copy</text>
+<circle cx="362" cy="286" r="13" fill="#35b276" stroke="#ffffff" stroke-width="2"/>
+<text x="362" y="290.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">3</text>
+<line x1="320" y1="324.0" x2="360" y2="324.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="620" y1="324.0" x2="688" y2="324.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="690" y="290" width="230" height="68" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="805.0" y="326.75" text-anchor="middle" font-size="13.5" font-weight="600" fill="#2f3a3a">Shared market DB</text>
+<line x1="920" y1="324.0" x2="943" y2="324.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="20" y="386" width="300" height="92" rx="14" fill="#e7ffcc" stroke="#35b276" stroke-width="2"/>
+<circle cx="49.0" cy="432.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(36,419.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5a4.5 4.5 0 1 0 0 7"/><path d="M7.5 11h6M7.5 13.5h6"/></g>
+<text x="84" y="427.75" text-anchor="start" font-size="16" font-weight="600" fill="#2f3a3a">ECB rates API</text>
+<text x="84" y="448.75" text-anchor="start" font-size="12.5" font-weight="400" fill="#5a6470">euro reference rates</text>
+<rect x="266.0" y="394" width="46.0" height="20" rx="10" fill="#35b276"/>
+<text x="289.0" y="408" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">REAL</text>
+<rect x="362" y="394" width="258" height="76" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="491.0" y="427.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">REST API, incremental</text>
+<text x="491.0" y="446.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">in a Docker container</text>
+<circle cx="362" cy="394" r="13" fill="#35b276" stroke="#ffffff" stroke-width="2"/>
+<text x="362" y="398.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">4</text>
+<line x1="320" y1="432.0" x2="360" y2="432.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="620" y1="432.0" x2="688" y2="432.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="690" y="398" width="230" height="68" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="805.0" y="434.75" text-anchor="middle" font-size="13.5" font-weight="600" fill="#2f3a3a">RAW ECB rates</text>
+<line x1="920" y1="432.0" x2="943" y2="432.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="20" y="494" width="300" height="92" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<circle cx="49.0" cy="540.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(36,527.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 12h6M9 16h6"/></g>
+<text x="84" y="535.75" text-anchor="start" font-size="16" font-weight="600" fill="#2f3a3a">Banque de France</text>
+<text x="84" y="556.75" text-anchor="start" font-size="12.5" font-weight="400" fill="#5a6470">registry CSV files</text>
+<rect x="362" y="502" width="258" height="76" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="491.0" y="535.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">PUT + Snowpipe</text>
+<text x="491.0" y="554.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">REST-triggered</text>
+<circle cx="362" cy="502" r="13" fill="#35b276" stroke="#ffffff" stroke-width="2"/>
+<text x="362" y="506.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">5</text>
+<line x1="320" y1="540.0" x2="360" y2="540.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="620" y1="540.0" x2="688" y2="540.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="690" y="506" width="230" height="68" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="805.0" y="542.75" text-anchor="middle" font-size="13.5" font-weight="600" fill="#2f3a3a">RAW BdF registry</text>
+<line x1="920" y1="540.0" x2="943" y2="540.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="20" y="602" width="300" height="92" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<circle cx="49.0" cy="648.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(36,635.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></g>
+<text x="84" y="643.75" text-anchor="start" font-size="16" font-weight="600" fill="#2f3a3a">Mobile app</text>
+<text x="84" y="664.75" text-anchor="start" font-size="12.5" font-weight="400" fill="#5a6470">events · JSON lines</text>
+<rect x="362" y="610" width="258" height="76" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="491.0" y="643.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">PUT + COPY INTO</text>
+<text x="491.0" y="662.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">batch</text>
+<circle cx="362" cy="610" r="13" fill="#35b276" stroke="#ffffff" stroke-width="2"/>
+<text x="362" y="614.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">6</text>
+<line x1="320" y1="648.0" x2="360" y2="648.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<line x1="620" y1="648.0" x2="688" y2="648.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="690" y="614" width="230" height="68" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="805.0" y="650.75" text-anchor="middle" font-size="13.5" font-weight="600" fill="#2f3a3a">RAW app events</text>
+<line x1="920" y1="648.0" x2="943" y2="648.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="945" y="74" width="225" height="300" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<circle cx="974.0" cy="224.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(961,211.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l10 5-10 5L2 7z"/><path d="M2 12l10 5 10-5"/><path d="M2 17l10 5 10-5"/></g>
+<text x="1009" y="194.5" text-anchor="start" font-size="17" font-weight="600" fill="#2f3a3a">STAGING</text>
+<text x="1009" y="216.5" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">11 views</text>
+<text x="1009" y="233.5" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">1 per source</text>
+<text x="1009" y="250.5" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">typed, renamed,</text>
+<text x="1009" y="267.5" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">flagged</text>
+<rect x="945" y="398" width="225" height="300" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<circle cx="974.0" cy="548.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(961,535.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3L20 9"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5.3L4 15"/><path d="M4 20v-5h5"/></g>
+<text x="1009" y="518.0" text-anchor="start" font-size="16" font-weight="600" fill="#2f3a3a">INTERMEDIATE</text>
+<text x="1009" y="539.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">de-duplicated</text>
+<text x="1009" y="556.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">client history</text>
+<text x="1009" y="573.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">ECB vs Marketplace</text>
+<text x="1009" y="590.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">credit status</text>
+<rect x="1195" y="72" width="245" height="72" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="1317.5" y="103.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">FINANCE</text>
+<text x="1317.5" y="122.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">transactions, clients</text>
+<line x1="1170" y1="108.0" x2="1193" y2="108.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="1195" y="180" width="245" height="72" rx="14" fill="#ffffff" stroke="#35b276" stroke-width="2"/>
+<text x="1317.5" y="211.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">SERVING · LIVE</text>
+<text x="1317.5" y="230.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">balance, app views</text>
+<line x1="1170" y1="216.0" x2="1193" y2="216.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="1195" y="288" width="245" height="72" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="1317.5" y="319.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">REGULATORY</text>
+<text x="1317.5" y="338.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">BdF report, AML</text>
+<line x1="1170" y1="324.0" x2="1193" y2="324.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="1195" y="396" width="245" height="72" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="1317.5" y="427.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">MARKET</text>
+<text x="1317.5" y="446.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">FX, prices in €</text>
+<line x1="1170" y1="432.0" x2="1193" y2="432.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="1195" y="504" width="245" height="72" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="1317.5" y="535.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">DIGITAL</text>
+<text x="1317.5" y="554.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">app engagement</text>
+<line x1="1170" y1="540.0" x2="1193" y2="540.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="1195" y="612" width="245" height="72" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<text x="1317.5" y="643.25" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2f3a3a">DATA QUALITY</text>
+<text x="1317.5" y="662.75" text-anchor="middle" font-size="12" font-weight="400" fill="#5a6470">rejected messages</text>
+<line x1="1170" y1="648.0" x2="1193" y2="648.0" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="690" y="718" width="240" height="90" rx="14" fill="#ffffff" stroke="#35b276" stroke-width="2"/>
+<circle cx="719.0" cy="763.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(706,750.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></g>
+<text x="754" y="758.25" text-anchor="start" font-size="14.5" font-weight="600" fill="#2f3a3a">dbt build + tests</text>
+<text x="754" y="777.75" text-anchor="start" font-size="12" font-weight="400" fill="#5a6470">task graph · 15 min</text>
+<circle cx="696" cy="724" r="13" fill="#347470" stroke="#ffffff" stroke-width="2"/>
+<text x="696" y="728.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">7</text>
+<rect x="945" y="718" width="240" height="90" rx="14" fill="#ffffff" stroke="#35b276" stroke-width="2"/>
+<circle cx="974.0" cy="763.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(961,750.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h8l-1 8 9-12h-8z"/></g>
+<text x="1009" y="758.25" text-anchor="start" font-size="14.5" font-weight="600" fill="#2f3a3a">Dynamic tables</text>
+<text x="1009" y="777.75" text-anchor="start" font-size="12" font-weight="400" fill="#5a6470">live · 1 min</text>
+<circle cx="951" cy="724" r="13" fill="#347470" stroke="#ffffff" stroke-width="2"/>
+<text x="951" y="728.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">8</text>
+<rect x="1200" y="718" width="240" height="90" rx="14" fill="#ffffff" stroke="#35b276" stroke-width="2"/>
+<circle cx="1229.0" cy="763.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(1216,750.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></g>
+<text x="1264" y="758.25" text-anchor="start" font-size="14.5" font-weight="600" fill="#2f3a3a">Governance</text>
+<text x="1264" y="777.75" text-anchor="start" font-size="12" font-weight="400" fill="#5a6470">roles · masking · rows</text>
+<circle cx="1206" cy="724" r="13" fill="#347470" stroke="#ffffff" stroke-width="2"/>
+<text x="1206" y="728.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">9</text>
+<rect x="1500" y="80" width="320" height="130" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<circle cx="1529.0" cy="145.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(1516,132.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></g>
+<text x="1564" y="133.0" text-anchor="start" font-size="18" font-weight="600" fill="#2f3a3a">Mobile app</text>
+<text x="1564" y="156.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">live balance &lt; 2 min</text>
+<text x="1564" y="173.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">own rows only</text>
+<line x1="1440" y1="145" x2="1498" y2="145" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="1500" y="270" width="320" height="130" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<circle cx="1529.0" cy="335.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(1516,322.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 13l3-3 3 2 4-4"/></g>
+<text x="1564" y="323.0" text-anchor="start" font-size="18" font-weight="600" fill="#2f3a3a">Dashboard</text>
+<text x="1564" y="346.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">Streamlit</text>
+<text x="1564" y="363.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">clients · advisors · ops</text>
+<line x1="1440" y1="335" x2="1498" y2="335" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="1500" y="460" width="320" height="130" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<circle cx="1529.0" cy="525.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(1516,512.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l10 5H2z"/><path d="M5 10v8M9.7 10v8M14.3 10v8M19 10v8M2 21h20"/></g>
+<text x="1564" y="513.0" text-anchor="start" font-size="18" font-weight="600" fill="#2f3a3a">Regulators</text>
+<text x="1564" y="536.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">Banque de France</text>
+<text x="1564" y="553.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">AML → Tracfin</text>
+<line x1="1440" y1="525" x2="1498" y2="525" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
+<rect x="1500" y="650" width="320" height="130" rx="14" fill="#ffffff" stroke="#b8e28a" stroke-width="2"/>
+<circle cx="1529.0" cy="715.0" r="20.0" fill="#e7ffcc"/>
+<g transform="translate(1516,702.0) scale(1.0833333333333333)" fill="none" stroke="#347470" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 15c2.5.6 4 2.6 4 6"/></g>
+<text x="1564" y="703.0" text-anchor="start" font-size="18" font-weight="600" fill="#2f3a3a">Analysts</text>
+<text x="1564" y="726.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">SQL on Gold</text>
+<text x="1564" y="743.0" text-anchor="start" font-size="13" font-weight="400" fill="#5a6470">masked personal data</text>
+<line x1="1440" y1="715" x2="1498" y2="715" stroke="#8fb79a" stroke-width="2.2" marker-end="url(#ah)"/>
 </svg>
