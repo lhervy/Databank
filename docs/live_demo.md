@@ -16,7 +16,7 @@ The three diagrams on slides 5, 12 and 13 are drawn by [`docs/img/make_slide_dia
 | 1:05–1:30 | Thomas | 4 Three use cases | |
 | 1:30–2:20 | Thomas | 5 Architecture today | |
 | 2:20–3:00 | Thomas | 6 Six sources, six ingestion methods | **Steps 1–2:** payments arriving now, then in Gold seconds later |
-| 3:00–4:20 | Adrien | 7 Transform & serve | **Step 3:** dashboard, client C000042, pending payments, pipeline health |
+| 3:00–4:20 | Adrien | 7 Transform & serve | **Step 3:** dashboard, first client in the list (has a portfolio and pending payments), pipeline health |
 | 4:20–4:55 | Adrien | 8 Proof it works | |
 | 4:55–5:40 | Adrien | 9 Reliability (failing check, 2 incidents) | live **Step 5** only if time allows |
 | 5:40–7:00 | Lélia | 10 Security & costs | **Step 4:** analyst sees masked names and is denied raw data; compliance sees them in clear |
@@ -46,7 +46,7 @@ workspace with `11_demo_script.sql` · the dashboard · the GitHub repository RE
 | 1 | Thomas | run the Step 1 query | "These are card payments sent by a GitHub Actions job right now, every 10 seconds." | a few hundred messages in the last 5 minutes, last one a few seconds ago |
 | 2 | Thomas | run the Step 2 query | "The same payments, de-duplicated and validated, already in Gold, a few seconds later." | the 10 latest payments, `seconds_since_payment` small, status `PENDING` |
 | 4 | Lélia | run the Step 4 block | "Same table, two roles: the analyst sees masked data and cannot open raw data; compliance sees it in clear." | masked names / IBAN `FR76 ****`; then an *not authorized* error; then clear names |
-| 3 | Adrien | open the dashboard, client C000042, click *Refresh*, then *Pipeline health* | "This is what the client app reads: balance minus pending payments, updated live." | pending payments listed; freshness green for card payments |
+| 3 | Adrien | open the dashboard (the first client has a portfolio and pending payments), click *Refresh*, then *Pipeline health* | "This is what the client app reads: balance minus pending payments, updated live." | pending payments listed; freshness green for card payments |
 | 5 | Adrien | (optional) run the Step 5 block | "A payment dated 2030 is injected: the check fails, dbt stops what depends on it, the regulatory report keeps its last good version." | build fails with `ERROR=1`, downstream skipped; recovery run passes |
 
 ## If something goes wrong

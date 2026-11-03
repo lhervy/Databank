@@ -22,6 +22,7 @@ st.set_page_config(page_title="Databank", layout="wide")
 
 # ------------------------------------------------------------------ look and feel (deck colours)
 DARK, GREEN, MID, LIGHT, PALE, GREY = "#347470", "#35b276", "#5ec57e", "#b8e28a", "#e7ffcc", "#5a6470"
+FONT = "Poppins, Segoe UI, Helvetica, Arial, sans-serif"
 
 ICONS = {
     "wallet": '<rect x="2" y="6" width="20" height="14" rx="2"/><path d="M16 13h2M2 10h20M6 6V4h12v2"/>',
@@ -94,19 +95,21 @@ def eur(x) -> str:
 
 
 def style_chart(c: alt.Chart) -> alt.Chart:
-    return (c.configure_axis(labelColor=GREY, titleColor=GREY, gridColor="#eef3ea", domainColor=LIGHT, labelFont="Poppins", titleFont="Poppins")
-             .configure_view(strokeWidth=0).configure_legend(labelColor=GREY, titleColor=GREY, labelFont="Poppins", orient="top"))
+    return (c.configure_axis(labelColor=GREY, titleColor=GREY, gridColor="#eef3ea", domainColor=LIGHT, labelFont=FONT, titleFont=FONT, labelLimit=260)
+             .configure_view(strokeWidth=0).configure_legend(labelColor=GREY, titleColor=GREY, labelFont=FONT, orient="top"))
 
 
 tab_client, tab_market, tab_ops = st.tabs(["Client view", "Markets", "Pipeline health"])
 
 # ------------------------------------------------------------------ client
 with tab_client:
-    clients = q("""SELECT client_id FROM DATABANK.MARTS.ACCOUNT_LIVE_BALANCE
-                   ORDER BY pending_count DESC, client_id LIMIT 300""")
+    clients = q("""SELECT b.client_id FROM DATABANK.MARTS.ACCOUNT_LIVE_BALANCE b
+                   LEFT JOIN (SELECT DISTINCT client_id FROM DATABANK.MARTS.PORTFOLIO_VALUATION) p ON p.client_id = b.client_id
+                   ORDER BY (p.client_id IS NOT NULL) DESC, b.pending_count DESC, b.client_id
+                   LIMIT 300""")
     ids = list(clients["CLIENT_ID"])
     pick, refresh = st.columns([4, 1])
-    cid = pick.selectbox("Client", ids, index=ids.index("C000042") if "C000042" in ids else 0)
+    cid = pick.selectbox("Client", ids, index=0)
     if not re.fullmatch(r"C\d{6}", str(cid)):
         st.stop()
     refresh.markdown("<div style='height:28px'></div>", unsafe_allow_html=True)
@@ -146,9 +149,9 @@ with tab_client:
         if sp.empty:
             st.info("No spending in the last 30 days.")
         else:
-            base = alt.Chart(sp).encode(y=alt.Y("CATEGORY:N", sort="-x", title=None), x=alt.X("SPEND:Q", title="€"))
+            base = alt.Chart(sp).encode(y=alt.Y("CATEGORY:N", sort="-x", title=None), x=alt.X("SPEND:Q", title="€", scale=alt.Scale(domain=[0, float(sp["SPEND"].max()) * 1.15])))
             bars = base.mark_bar(cornerRadiusEnd=8, color=GREEN, size=22)
-            labels = base.mark_text(align="left", dx=6, color=DARK, fontWeight="bold", font="Poppins").encode(text=alt.Text("SPEND:Q", format=",.0f"))
+            labels = base.mark_text(align="left", dx=6, color=DARK, fontWeight="bold", font=FONT).encode(text=alt.Text("SPEND:Q", format=",.0f"))
             st.altair_chart(style_chart((bars + labels).properties(height=max(220, 38 * len(sp)))), use_container_width=True)
     with right:
         st.subheader("Portfolio")
@@ -232,8 +235,8 @@ with tab_ops:
         if dq.empty:
             st.success("No message in quarantine.")
         else:
-            base = alt.Chart(dq).encode(y=alt.Y("REASON:N", sort="-x", title=None), x=alt.X("N:Q", title="messages"))
-            chart = base.mark_bar(cornerRadiusEnd=8, color=MID, size=24) + base.mark_text(align="left", dx=6, color=DARK, fontWeight="bold", font="Poppins").encode(text="N:Q")
+            base = alt.Chart(dq).encode(y=alt.Y("REASON:N", sort="-x", title=None), x=alt.X("N:Q", title="messages", scale=alt.Scale(domain=[0, float(dq["N"].max()) * 1.15])))
+            chart = base.mark_bar(cornerRadiusEnd=8, color=MID, size=24) + base.mark_text(align="left", dx=6, color=DARK, fontWeight="bold", font=FONT).encode(text="N:Q")
             st.altair_chart(style_chart(chart.properties(height=max(160, 44 * len(dq)))), use_container_width=True)
     with b:
         st.subheader("Ingestion speed · last hour")
