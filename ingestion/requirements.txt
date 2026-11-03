@@ -1,6 +1,6 @@
 # Pinned versions: the same libraries everywhere (laptop, GitHub Actions, Docker image).
-snowflake-connector-python[pandas]==5.1.0
+snowflake-connector-python[pandas]==3.18.1   # 3.x: required by snowflake-ingest (Snowpipe REST client)
 snowflake-ingest==1.0.13
-cryptography==50.0.2
+cryptography==46.0.0
 requests==2.33.0
 pandas==2.3.3
