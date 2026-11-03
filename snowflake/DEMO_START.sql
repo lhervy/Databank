@@ -10,9 +10,10 @@ USE WAREHOUSE DATABANK_WH;
 
 ALTER DYNAMIC TABLE DATABANK.MARTS.FCT_CARD_TRANSACTIONS RESUME;   -- card payments, refreshed every minute
 ALTER DYNAMIC TABLE DATABANK.MARTS.ACCOUNT_LIVE_BALANCE  RESUME;   -- live balances, refreshed every minute
-ALTER TASK DATABANK.DBT.T_20_DBT_FRESHNESS RESUME;                 -- the 15-minute pipeline (3 steps)
-ALTER TASK DATABANK.DBT.T_10_DBT_BUILD     RESUME;
-ALTER TASK DATABANK.DBT.T_00_ROOT          RESUME;
+-- the 15-minute pipeline (3 steps): pause it first, so this file also works when it is already on,
+-- then switch on the 3 steps together
+ALTER TASK DATABANK.DBT.T_00_ROOT SUSPEND;
+SELECT SYSTEM$TASK_DEPENDENTS_ENABLE('DATABANK.DBT.T_00_ROOT');
 ALTER TASK DATABANK.CORE_BANKING.T_SIMULATE_ACTIVITY RESUME;       -- core banking simulator
 
 SELECT 'Live parts are ON - the demo is ready' AS status;
