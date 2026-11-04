@@ -142,9 +142,9 @@ Every area of the pipeline has one owner: the person who answers "who fixes it a
 
 | Area | What it covers | Owner |
 |---|---|---|
-| Ingestion | sources A, D, E, F, the Python loaders, GitHub Actions, the Docker job; incident 2 (ECB outage) | **Thomas** |
-| Core banking, security and governance | source B (CDC), roles, masking, row access, cost control, Terraform | **Lélia** |
-| Transformation and serving | dbt models and tests, task graph, dynamic tables, dashboard; incident 1 (replay) | **Adrien** |
+| Ingestion | sources A, D, E, F, the Python loaders, GitHub Actions, the Docker job; incident 2 (ECB outage) | **Adrien** |
+| Core banking, security and governance | source B (CDC), roles, masking, row access, cost control, Terraform | **Thomas** |
+| Transformation and serving | dbt models and tests, task graph, dynamic tables, dashboard; incident 1 (replay) | **Lélia** |
 
 ## 9. Documentation
 
