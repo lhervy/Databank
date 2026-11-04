@@ -28,6 +28,7 @@ Why is `02` before `01`? The core banking script fills the change log table, whi
 |---|---|
 | [`DEMO_START.sql`](DEMO_START.sql) / [`DEMO_STOP.sql`](DEMO_STOP.sql) | one-click switch for the oral defense: *Run all* before the demo / after it (also in the Snowflake workspace) |
 | [`07_live_demo.sql`](07_live_demo.sql) | about 10 minutes before a demo: turns on the live tables, the schedule and the activity simulator |
+| [`ERROR_DEMO.sql`](ERROR_DEMO.sql) | live error demo for slide 9: a broken message goes to quarantine, a 2030 payment fails a check and is blocked, then the fix (run block by block, not *Run all*) |
 | [`11_demo_script.sql`](11_demo_script.sql) | the queries shown during the oral defense, in order (see [docs/live_demo.md](../docs/live_demo.md)) |
 | [`12_budget_and_monitors.sql`](12_budget_and_monitors.sql) | cost guard rails (run once): resource monitors `DATABANK_RM` (20 credits/month, project warehouses) and `DATABANK_ACCOUNT_RM` (30 credits/month, every warehouse; suspends at 100 %), plus the account budget (30 credits/month, alerts on all spending, including the dashboard container) |
 | [`98_pause_all.sql`](98_pause_all.sql) | **after every demo**: stops everything that costs credits |

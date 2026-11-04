@@ -49,8 +49,9 @@ USE ROLE ACCOUNTADMIN;
 USE SECONDARY ROLES ALL;
 
 -- ---------------------------------------------------------------------
--- STEP 5 · Adrien · a check that fails and blocks bad data (optional, ~1 min)
---          Same as drill 4 in 10_evidence_drills.sql
+-- STEP 5 · a check that fails and blocks bad data
+--          For the defense, use ERROR_DEMO.sql (two errors, commented, block by block).
+--          The block below is the short version of the same drill.
 -- ---------------------------------------------------------------------
 INSERT INTO DATABANK.RAW.TPE_AUTHORIZATIONS (record_json, producer_id, batch_id, ingested_at)
 SELECT TO_JSON(OBJECT_INSERT(OBJECT_INSERT(TRY_PARSE_JSON(record_json), 'transaction_id', 'DRILL-FUTURE-0001', TRUE),
