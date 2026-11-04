@@ -75,6 +75,17 @@ during business hours only, and the dashboard container stops after each use. Es
 **60–120 credits per month** for production, against about 4 per month for the prototype as used today.
 A real bank would pay for this; our project never does.
 
+**Cost guard rails** ([`snowflake/12_budget_and_monitors.sql`](../snowflake/12_budget_and_monitors.sql), run once
+as `ACCOUNTADMIN`):
+
+| Tool | Watches | Limit | What it does |
+|---|---|---|---|
+| Resource monitor `DATABANK_RM` | the 3 project warehouses | 20 credits / month | alert at 75 %, suspends them at 100 % |
+| Resource monitor `DATABANK_ACCOUNT_RM` | every warehouse in the account | 30 credits / month | alerts at 50 % and 80 %, suspends at 100 %, stops running queries at 110 % |
+| Account budget (Admin → Cost management → Budgets) | all credit use, including the dashboard container, Snowpipe and serverless tasks | 30 credits / month | alerts only (it does not stop anything) |
+
+Check: `SHOW RESOURCE MONITORS;` and `CALL SNOWFLAKE.LOCAL.ACCOUNT_ROOT_BUDGET!GET_SPENDING_LIMIT();`.
+
 **Shutdown and clean-up procedure:**
 1. After every demo: run `snowflake/98_pause_all.sql` (stops the schedule, the simulator and the live tables).
 2. Stop the dashboard container: `ALTER COMPUTE POOL SYSTEM_COMPUTE_POOL_CPU STOP ALL;` (it restarts the next time the app is opened).
