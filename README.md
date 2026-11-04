@@ -249,7 +249,7 @@ We state them openly; each one has a planned next step.
 
 ## 14. Usage of AI
 
-*To be completed by the team.*
+To be frank, most of the **technical part** of the project was done by AI, however, it was us who designed the steps "Add a budget of a 100% usage with a 80% usage notification", "Design a streamlit app in which we can see the pipeline's health as well ass the customer's view". We focused more on understanding the concepts. 
 
 ---
 
