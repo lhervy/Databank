@@ -21,6 +21,13 @@ SELECT COUNT(*)              AS messages_last_5_min,
 FROM DATABANK.RAW.TPE_AUTHORIZATIONS
 WHERE ingested_at > DATEADD(minute, -5, SYSDATE());
 
+
+-- Bronze: the latest raw messages, exactly as they arrive. I have to run it after step 1
+SELECT ingested_at, producer_id, record_json
+FROM DATABANK.RAW.TPE_AUTHORIZATIONS
+ORDER BY ingested_at DESC
+LIMIT 10;
+
 -- ---------------------------------------------------------------------
 -- STEP 2 · Thomas · the same payments, cleaned, in Gold (seconds later)
 -- ---------------------------------------------------------------------
@@ -29,6 +36,22 @@ SELECT event_ts, client_id, merchant_name, amount_eur, booking_status,
 FROM DATABANK.MARTS.FCT_CARD_TRANSACTIONS
 ORDER BY event_ts DESC
 LIMIT 10;
+
+-- STEP 2b · Thomas · Bronze -> Gold: the same payment, raw (left) and clean (right)
+--           Then open models/marts/finance/fct_card_transactions.sql (the SQL that does it)
+SELECT r.record_json      AS bronze_raw_message,
+       g.transaction_id,
+       g.client_id,
+       g.merchant_name,
+       g.amount_eur,
+       g.booking_status,
+       g.fraud_score
+FROM DATABANK.MARTS.FCT_CARD_TRANSACTIONS g
+JOIN DATABANK.RAW.TPE_AUTHORIZATIONS r
+  ON TRY_PARSE_JSON(r.record_json):transaction_id::STRING = g.transaction_id
+WHERE r.ingested_at > DATEADD(minute, -10, SYSDATE())
+ORDER BY g.event_ts DESC
+LIMIT 3;
 
 -- STEP 3 · Adrien · open the dashboard (Projects > Streamlit > Databank):
 --          client C000042 > pending payments > "Refresh" > Pipeline health tab
